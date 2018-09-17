@@ -50,9 +50,6 @@ public class TranscriptDesigner {
     }
 
     public Transcript run(String peptide, Set<RBSOption> ignores) throws Exception {
-        //Choose an RBS
-        RBSOption selectedRBS = rbsChooser.run(peptide, ignores);
-        
         //Choose codons for each amino acid
         String[] codons = new String[peptide.length()];
         for(int i=0; i<peptide.length(); i++) {
@@ -60,6 +57,13 @@ public class TranscriptDesigner {
             String codon = aminoAcidToCodon.get(aa);
             codons[i] = codon;
         }
+        
+        //Choose an RBS
+        StringBuilder cds = new StringBuilder();
+        for(int i=0; i<codons.length; i++) {
+            cds.append(codons[i]);
+        }
+        RBSOption selectedRBS = rbsChooser.run(cds.toString(), ignores);
         
         //Construct the Transcript and return it
         Transcript out = new Transcript(selectedRBS, peptide, codons);

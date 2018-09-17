@@ -223,10 +223,7 @@ public class Team1Test {
         
         //Instantiate and run this algorithm
         Construct dna = c2d.run(comp);
-        //Compile the Construct to a sequence
-        ConstructToSequence cts = new ConstructToSequence();
-        cts.initiate();
-        String seq = cts.run(dna, true);
+        String seq = dna.toSeq();
         
         double ACount = 0;
         double CCount = 0;
@@ -276,10 +273,7 @@ public class Team1Test {
         
         //Instantiate and run this algorithm
         Construct dna = c2d.run(comp);
-        //Compile the Construct to a sequence
-        ConstructToSequence cts = new ConstructToSequence();
-        cts.initiate();
-        String seq = cts.run(dna, true);
+        String seq = dna.toSeq();
         
         ArrayList<String> proteins2 = new ArrayList<>();
         proteins2.add(protein1);
@@ -289,7 +283,7 @@ public class Team1Test {
         //Instantiate and run this algorithm
         Construct dna2 = c2d.run(comp2);
         //Compile the Construct to a sequence
-        String seq2 = cts.run(dna2, true);
+        String seq2 = dna2.toSeq();
         
         assertTrue(seq2.length()-seq.length() == 3);
         
@@ -331,10 +325,7 @@ public class Team1Test {
         
         //Instantiate and run this algorithm
         Construct dna = c2d.run(comp);
-        //Compile the Construct to a sequence
-        ConstructToSequence cts = new ConstructToSequence();
-        cts.initiate();
-        String seq = cts.run(dna, true);
+        String seq = dna.toSeq();
         
         ArrayList<String> proteins2 = new ArrayList<>();
         //protein7 added many times to increase likelihood of choosing an rbs with a forbidden sequence with it
@@ -350,8 +341,7 @@ public class Team1Test {
 
         //Instantiate and run this algorithm
         Construct dna2 = c2d.run(comp2);
-        //Compile the Construct to a sequence
-        String seq2 = cts.run(dna2, true);
+        String seq2 = dna2.toSeq();
         assertFalse(forbiddenSequenceChecker(seq));
         assertFalse(forbiddenSequenceChecker(seq2));
 
@@ -381,10 +371,7 @@ public class Team1Test {
 
         //Instantiate and run this algorithm
         Construct dna = c2d.run(comp);
-        //Compile the Construct to a sequence
-        ConstructToSequence cts = new ConstructToSequence();
-        cts.initiate();
-        String seq = cts.run(dna, true);
+        String seq = dna.toSeq();
 
         protein1=protein1.toLowerCase();
         protein2=protein2.toLowerCase();
@@ -399,7 +386,7 @@ public class Team1Test {
         Composition comp2 = new Composition(Host.Ecoli, promoter, proteins2, terminator);
 
         Construct dna2 = c2d.run(comp2);
-        String seq2 = cts.run(dna2, true);
+        String seq2 = dna2.toSeq();
 
         //makes both sequences uppercase, since it isn't wrong if the cases are different if passed in different cases
         seq=seq.toUpperCase();

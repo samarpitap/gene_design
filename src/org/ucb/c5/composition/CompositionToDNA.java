@@ -86,12 +86,5 @@ public class CompositionToDNA {
         
         //Print out the results
         System.out.println(dna.toSeq());
-        
-        
-        double numKB = 2.3; //2300 bp
-        int ceil_kb = (int) Math.ceil(numKB); ///Round up
-        int seconds = 30*ceil_kb;  //Make programs for each KB with this many seconds
-        
-        
     }
 }
