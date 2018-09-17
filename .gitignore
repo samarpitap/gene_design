@@ -1,0 +1,16 @@
+
+.idea/uiDesigner.xml
+
+*.xml
+
+*.iml
+
+*.xml
+
+.idea/workspace.xml
+
+*.class
+
+out/production/BioE134_Project3/org/ucb/c5/composition/data/coli_genes.txt
+
+out/production/BioE134_Project3/org/ucb/c5/composition/data/rbs_options.txt
