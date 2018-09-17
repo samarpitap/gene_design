@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * This is a simple RBS selection algorithm. Provided a protein sequence,
+ * This is a simple RBS selection algorithm. Provided a CDS,
  * it arbitrarily selects an RBS to include from a list of options. It also
  * allows the user to supply a list of RBSOptions to exclude in making the 
  * selection
@@ -51,7 +51,7 @@ public class RBSChooser {
         rbsOptions.add(opt3);
     }
 
-    public RBSOption run(String dnaseq, Set<RBSOption> ignores) throws Exception {
+    public RBSOption run(String cds, Set<RBSOption> ignores) throws Exception {
         for(RBSOption rbsopt : rbsOptions) {
             if(!ignores.contains(rbsopt)) {
                 return rbsopt;
@@ -63,7 +63,7 @@ public class RBSChooser {
     
     public static void main(String[] args) throws Exception {
         //Create an example
-        String peptide = "atgaaaggttatattctcaatctcaccattcgcggtcagggggtggtgaaaaatcagggacgagaatttgtttgccgaccgggtgatattttgctgttcccgccaggagagattcatcactacggtcgtcatccggaggctcgcgaatggtatcaccagtgggtttactttcgtccgcgcgcctactggcatgaatggcttaactggccgtcaatatttgccaatacggggttctttcgcccggatgaagcgcaccagccgcatttcagcgacctgtttgggcaaatcattaacgccgggcaaggggaagggcgctattcggagctgctggcgataaatctgcttgagcaattgttactgcggcgcatggaagcgattaacgagtcgctccatccaccgatggataatcgggtacgcgaggcttgtcagtacatcagcgatcacctggcagacagcaattttgatatcgccagcgtcgcacagcatgtttgcttgtcgccgtcgcgtctgtcacatcttttccgccagcagttagggattagcgtcttaagctggcgcgaggaccaacgtatcagccaggcgaagctgcttttgagcaccacccggatgcctatcgccaccgtcggtcgcaatgttggttttgacgatcaactctatttctcgcgggtatttaaaaaatgcaccggggccagcccgagcgagttccgtgccggttgtgaagaaaaagtgaatgatgtagccgtcaagttgtcataa";
+        String cds = "atgaaaggttatattctcaatctcaccattcgcggtcagggggtggtgaaaaatcagggacgagaatttgtttgccgaccgggtgatattttgctgttcccgccaggagagattcatcactacggtcgtcatccggaggctcgcgaatggtatcaccagtgggtttactttcgtccgcgcgcctactggcatgaatggcttaactggccgtcaatatttgccaatacggggttctttcgcccggatgaagcgcaccagccgcatttcagcgacctgtttgggcaaatcattaacgccgggcaaggggaagggcgctattcggagctgctggcgataaatctgcttgagcaattgttactgcggcgcatggaagcgattaacgagtcgctccatccaccgatggataatcgggtacgcgaggcttgtcagtacatcagcgatcacctggcagacagcaattttgatatcgccagcgtcgcacagcatgtttgcttgtcgccgtcgcgtctgtcacatcttttccgccagcagttagggattagcgtcttaagctggcgcgaggaccaacgtatcagccaggcgaagctgcttttgagcaccacccggatgcctatcgccaccgtcggtcgcaatgttggttttgacgatcaactctatttctcgcgggtatttaaaaaatgcaccggggccagcccgagcgagttccgtgccggttgtgaagaaaaagtgaatgatgtagccgtcaagttgtcataa";
         
         //Initiate the chooser
         RBSChooser chooser = new RBSChooser();
@@ -71,13 +71,13 @@ public class RBSChooser {
         
         //Make the first choice with an empty Set of ignores
         Set<RBSOption> ignores = new HashSet<>();
-        RBSOption selected1 = chooser.run( peptide, ignores);
+        RBSOption selected1 = chooser.run(cds, ignores);
         
         //Add the first selection to the list of things to ignore
         ignores.add(selected1);
         
         //Choose again with an ignore added
-        RBSOption selected2 = chooser.run( peptide, ignores);
+        RBSOption selected2 = chooser.run(cds, ignores);
         
         //Print out the two options, which should be different
         System.out.println("Selected1:\n");
