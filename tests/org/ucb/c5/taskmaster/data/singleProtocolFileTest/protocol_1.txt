@@ -1,0 +1,13 @@
+>Construction of BasicConversionTest
+acquire	ca4238
+acquire	ca4239
+acquire	pTargetF
+
+pcr	ca4238,ca4239 on pTargetF	(3927 bp, ipcr)
+cleanup	ipcr	(pcr)
+digest	pcr with SpeI,DpnI	(spedig)
+cleanup	spedig	(dig)
+
+//Ligate and transform
+ligate	dig	(lig)
+transform	lig	(DH10B, Spec)
