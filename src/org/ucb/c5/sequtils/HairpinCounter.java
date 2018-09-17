@@ -1,7 +1,5 @@
 package org.ucb.c5.sequtils;
 
-import org.ucb.c5.sequtils.RevComp;
-
 /**
  * Calculates local secondary structure present in a dna sequence
  * 

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package org.ucb.c5.utils;
 
 import java.io.BufferedReader;
@@ -16,11 +10,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.io.Writer;
 import java.net.URL;
-import java.net.URLConnection;
 import org.ucb.c5.C5;
 
 
@@ -76,16 +68,12 @@ public class FileUtils {
         return fileName.endsWith( "." + extension );
     }
 
-    public static void writeFile(String datafile, String filePath) {
-        try {
-            Writer output = null;
-            File file = new File(filePath);
-            output = new FileWriter(file);
-            output.write(datafile);
-            output.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+    public static void writeFile(String datafile, String filePath) throws Exception {
+        Writer output = null;
+        File file = new File(filePath);
+        output = new FileWriter(file);
+        output.write(datafile);
+        output.close();
     }
 
    /**

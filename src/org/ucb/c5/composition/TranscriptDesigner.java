@@ -2,9 +2,7 @@ package org.ucb.c5.composition;
 
 import org.ucb.c5.composition.model.RBSOption;
 import org.ucb.c5.composition.model.Transcript;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 

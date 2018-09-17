@@ -37,5 +37,4 @@ public class Composition {
     public String getTerminator() {
         return terminator;
     }
-    
 }

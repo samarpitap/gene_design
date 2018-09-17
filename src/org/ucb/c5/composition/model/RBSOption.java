@@ -1,7 +1,7 @@
 package org.ucb.c5.composition.model;
 
 /**
- * Descriptes a ribosome binding site Part
+ * Describes a ribosome binding site Part
  *
  * @author J. Christopher Anderson
  */
