@@ -1,6 +1,4 @@
-
 package org.ucb.c5.composition;
-
 
 import java.util.*;
 
@@ -15,7 +13,6 @@ import org.ucb.c5.composition.model.Composition;
 import org.ucb.c5.sequtils.HairpinCounter;
 import org.ucb.c5.sequtils.RevComp;
 import org.ucb.c5.sequtils.Translate;
-
 
 /**
  * @author Matthew Sit
@@ -35,32 +32,30 @@ public class Team3Test {
 
     @Test
     /**
-     * Test if it starts with sort codon
-     * Joe Chen
+     * Test if it starts with sort codon Joe Chen
      */
     public void testTruismTeam3() throws Exception {
-        String promoter   = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
+        String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
-        String peptide    = "MPPLEYMAWYILLIYWMPLE";
+        String peptide = "MPPLEYMAWYILLIYWMPLE";
         ArrayList<String> list = new ArrayList<>();
         list.add(peptide);
         Composition comp = new Composition(Host.Ecoli, promoter, list, terminator);
         Construct dna = c2d.run(comp);
         List<Transcript> protein2dna = dna.getmRNAs();
-        String[] proteinsDnas  = protein2dna.get(0).getCodons();
+        String[] proteinsDnas = protein2dna.get(0).getCodons();
         String testProteinDna = proteinsDnas[0];
-        assertEquals( "ATG", testProteinDna.subSequence(0, 3) );
+        assertEquals("ATG", testProteinDna.subSequence(0, 3));
     }
 
     /**
-     * Test a truism that protein reverse translated can be translated back to original sequence
-     * Tests transcript run method
+     * Test a truism that protein reverse translated can be translated back to
+     * original sequence Tests transcript run method
+     *
      * @author Nicholas Hsu
      */
     // Reverse translate
-
     // Forbidden Sequences
-
     @Test
     public void proteinConsistencyTestNH() throws Exception {
         Translate translate = new Translate();
@@ -75,16 +70,17 @@ public class Team3Test {
         Construct dna = c2d.run(comp);
 
         List<Transcript> protein2dna = dna.getmRNAs();
-        String[] proteinsDnas  = protein2dna.get(0).getCodons();
+        String[] proteinsDnas = protein2dna.get(0).getCodons();
         for (int i = 0; i < protein.length(); i++) {
             String codon = proteinsDnas[i];
             assertEquals(protein.charAt(i), translate.run(codon).charAt(0));
         }
     }
     /*
-    Diego Alcantar
-    Truism test to make sure resulting sequence only contains A,T,G, or C
+     Diego Alcantar
+     Truism test to make sure resulting sequence only contains A,T,G, or C
      */
+
     @Test
     public void testOnlyATGC() throws Exception {
         String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
@@ -95,7 +91,7 @@ public class Team3Test {
         Composition comp = new Composition(Host.Ecoli, promoter, list, terminator);
         Construct dna = c2d.run(comp);
         List<Transcript> protein2dna = dna.getmRNAs();
-        String[] proteinsDnas  = protein2dna.get(0).getCodons();
+        String[] proteinsDnas = protein2dna.get(0).getCodons();
         String testProteinDna = proteinsDnas[0];
         Boolean onlyATGC = true;
         for (int i = 0; i < testProteinDna.length(); i++) {
@@ -109,7 +105,7 @@ public class Team3Test {
 
     @Test
     /* Diego Alcantar
-       Tests to make sure there are no internal stop codons
+     Tests to make sure there are no internal stop codons
      */
     public void testNoInternalStopCodons() throws Exception {
         String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
@@ -120,11 +116,11 @@ public class Team3Test {
         Composition comp = new Composition(Host.Ecoli, promoter, list, terminator);
         Construct dna = c2d.run(comp);
         List<Transcript> protein2dna = dna.getmRNAs();
-        String[] proteinsDnas  = protein2dna.get(0).getCodons();
+        String[] proteinsDnas = protein2dna.get(0).getCodons();
         String testProteinDna = proteinsDnas[0];
         ArrayList<String> stop_codons = new ArrayList<String>(Arrays.asList("TAG", "TAA", "TGA"));
         boolean noStop = true;
-        for (String stop_codon: stop_codons) {
+        for (String stop_codon : stop_codons) {
             if (testProteinDna.contains(stop_codon)) {
                 noStop = false;
                 break;
@@ -133,10 +129,8 @@ public class Team3Test {
         assertTrue(noStop);
     }
 
-
     /**
-     * Test and see if there are forbidden sequences
-     * Joe Chen
+     * Test and see if there are forbidden sequences Joe Chen
      */
     @Test
     public void testTruismTeam3_2() throws Exception {
@@ -161,7 +155,7 @@ public class Team3Test {
         forbidden.add("GCGGCCGC"); //NotI
         forbidden.add("AAGCTT");   //HindIII
         // No forbidden sequences
-        String promoter   = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
+        String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
         String peptide = "MALLSSSLSSQIPTGSHPLTHTQCIPHFSTTINAGISAGKPRSFYLRWGKGSNKIIACVGEGTTSLPYQSAEKTDSLSAPTLVKREFPPGFWKDHVIDSLTSSHKVSAAEEKRMETLISEIKNIFRSMGYGETNPSAYDTAWVARIPAVDGSEHPEFPETLEWILQNQLKDGSWGEGFYFLAYDRILATLACIITLTLWRTGETQIRKGIEFFKTQAGKIEDEADSHRPSGFEIVFPAMLKEAKVLGLDLPYELPFIKQIIEKREAKLERLPTNILYALPTTLLYSLEGLQEIVDWEKIIKLQSKDGSFLTSPASTAAVFMRTGNKKCLEFLNFVLKKFGNHVPCHYPLDLFERLWAVDTVERLGIDHHFKEEIKDALDYVYSHWDERGIGWARENPIPDIDDTAMGLRILRLHGYNVSSDVLKTFRDENGEFFCFLGQTQRGVTDMLNVNRCSHVAFPGETIMQEAKLCTERYLRNALEDVGAFDKWALKKNIRGEVEYALKYPWHRSMPRLEARSYIEHYGPNDVWLGKTMYMMPYISNLKYLELAKLDFNHVQSLHQKELRDLRRWWKSSGLSELKFTRERVTEIYFSAASFIFEPEFATCRDVYTKISIFTVILDDLYDAHGTLDNLELFSEGVKRWDLSLVDRMPQDMKICFTVLYNTVNEIAVEGRKRQGRDVLGYIRNVLEILLAAHTKEAEWSAARYVPSFDEYIENASVSISLGTLVLISVLFTGEILTDDVLSKIGRGSRFLQLMGLTGRLVNDTKTYEAERGQGEVASAVQCYMKEHPEISEEEALKHVYTVMENALDELNREFVNNRDVPDSCRRLVFETARIMQLFYMEGDGLTLSHEMEIKEHVKNCLFQPVA";
         ArrayList<String> list = new ArrayList<>();
@@ -181,21 +175,21 @@ public class Team3Test {
         String combined = seq + "x" + rc;
         combined = combined.toUpperCase();
         boolean result = true;
-        for(String site : forbidden) {
-            if(combined.contains(site)) {
+        for (String site : forbidden) {
+            if (combined.contains(site)) {
                 result = false;
             }
         }
         assertTrue(result);
     }
+
     @Test
     /**
-     * Check if the dna sequence encodes for the same protein
-     * Joe Chen
+     * Check if the dna sequence encodes for the same protein Joe Chen
      */
-    public void testTruismTeam3_3() throws Exception{
-        String peptide    = "MALLSSSLSSQIPTGSHPLTHTQCIPHFSTTINAGISAGKPRSFYLRWGKGSNKIIACVGEGTTSLPYQSAEKTDSLSAPTLVKREFPPGFWKDHVIDSLTSSHKVSAAEEKRMETLISEIKNIFRSMGYGETNPSAYDTAWVARIPAVDGSEHPEFPETLEWILQNQLKDGSWGEGFYFLAYDRILATLACIITLTLWRTGETQIRKGIEFFKTQAGKIEDEADSHRPSGFEIVFPAMLKEAKVLGLDLPYELPFIKQIIEKREAKLERLPTNILYALPTTLLYSLEGLQEIV";
-        String promoter   = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
+    public void testTruismTeam3_3() throws Exception {
+        String peptide = "MALLSSSLSSQIPTGSHPLTHTQCIPHFSTTINAGISAGKPRSFYLRWGKGSNKIIACVGEGTTSLPYQSAEKTDSLSAPTLVKREFPPGFWKDHVIDSLTSSHKVSAAEEKRMETLISEIKNIFRSMGYGETNPSAYDTAWVARIPAVDGSEHPEFPETLEWILQNQLKDGSWGEGFYFLAYDRILATLACIITLTLWRTGETQIRKGIEFFKTQAGKIEDEADSHRPSGFEIVFPAMLKEAKVLGLDLPYELPFIKQIIEKREAKLERLPTNILYALPTTLLYSLEGLQEIV";
+        String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
         ArrayList<String> list = new ArrayList<>();
         list.add(peptide);
@@ -215,12 +209,11 @@ public class Team3Test {
 
     @Test
     /**
-     * Testing local GC content
-     * Joe Chen
+     * Testing local GC content Joe Chen
      */
     public void testGCcontent() throws Exception {
-        String peptide    = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVEGERDVVGAAMREGALAPGKRIRPMLLLLTARDLGCAVSHDGLLDLACAVEMVHAASLILDDMPCMDDAKLRRGRPTIHSHYGEHVAILAAVALLSKAFGVIADADGLTPLAKNRAVSELSNAIGMQGLVQGQFKDLSEGDKPRSAEAILMTNHFKTSTLFCASMQMASIVANASSEARDCLHRFSLDLGQAFQLLDDLTDGMTDTGKDSNQDAGKSTLVNLLGPRAVEERLRQHLQLASEHLSAACQHGHATQHFIQAWFDKKLAAVS";
-        String promoter   = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
+        String peptide = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVEGERDVVGAAMREGALAPGKRIRPMLLLLTARDLGCAVSHDGLLDLACAVEMVHAASLILDDMPCMDDAKLRRGRPTIHSHYGEHVAILAAVALLSKAFGVIADADGLTPLAKNRAVSELSNAIGMQGLVQGQFKDLSEGDKPRSAEAILMTNHFKTSTLFCASMQMASIVANASSEARDCLHRFSLDLGQAFQLLDDLTDGMTDTGKDSNQDAGKSTLVNLLGPRAVEERLRQHLQLASEHLSAACQHGHATQHFIQAWFDKKLAAVS";
+        String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
         ArrayList<String> list = new ArrayList<>();
         list.add(peptide);
@@ -253,14 +246,13 @@ public class Team3Test {
 
     @Test
     /**
-     * Testing local secondary structure not above a certain threshold
-     * Joe Chen
+     * Testing local secondary structure not above a certain threshold Joe Chen
      */
     public void testSecondary() throws Exception {
         HairpinCounter counter = new HairpinCounter();
         counter.initiate();
-        String peptide    = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVEGERDVVGAAMREGALAPGKRIRPMLLLLTARDLGCAVSHDGLLDLACAVEMVHAASLILDDMPCMDDAKLRRGRPTIHSHYGEHVAILAAVALLSKAFGVIADADGLTPLAKNRAVSELSNAIGMQGLVQGQFKDLSEGDKPRSAEAILMTNHFKTSTLFCASMQMASIVANASSEARDCLHRFSLDLGQAFQLLDDLTDGMTDTGKDSNQDAGKSTLVNLLGPRAVEERLRQHLQLASEHLSAACQHGHATQHFIQAWFDKKLAAVS";
-        String promoter   = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
+        String peptide = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVEGERDVVGAAMREGALAPGKRIRPMLLLLTARDLGCAVSHDGLLDLACAVEMVHAASLILDDMPCMDDAKLRRGRPTIHSHYGEHVAILAAVALLSKAFGVIADADGLTPLAKNRAVSELSNAIGMQGLVQGQFKDLSEGDKPRSAEAILMTNHFKTSTLFCASMQMASIVANASSEARDCLHRFSLDLGQAFQLLDDLTDGMTDTGKDSNQDAGKSTLVNLLGPRAVEERLRQHLQLASEHLSAACQHGHATQHFIQAWFDKKLAAVS";
+        String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
         ArrayList<String> list = new ArrayList<>();
         list.add(peptide);
@@ -295,24 +287,24 @@ public class Team3Test {
         Composition comp = new Composition(Host.Ecoli, promoter, proteins, terminator);
         Construct dna = c2d.run(comp);
         List<Transcript> mRNAs = dna.getmRNAs();
-        String[] codons  = mRNAs.get(0).getCodons();
+        String[] codons = mRNAs.get(0).getCodons();
         String cds = "";
         for (int i = 0; i < codons.length; i += 1) {
             cds = cds + codons[i];
         }
         assertTrue(checker.run(cds));
     }
-    
-    @Test (expected=IllegalArgumentException.class)
+
+    @Test(expected = IllegalArgumentException.class)
     /**
      * Matthew Sit
      *
-     * Try many, many random sequences. Some are bound to be tricky.
-     * Test all for truism.
+     * Try many, many random sequences. Some are bound to be tricky. Test all
+     * for truism.
      *
      */
     public void testRandom() throws Exception {
-        String promoter   = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
+        String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
         String peptide = "M";
         RevComp2 rev = new RevComp2();
@@ -341,22 +333,25 @@ public class Team3Test {
             String testProteinDna = proteinsDnas[0];
 
             String result = "";
-            for (String s : proteinsDnas)
+            for (String s : proteinsDnas) {
                 result += s;
-            if (!testProteinDna.subSequence(0, 3).equals("ATG"))
-                // Start codon still in place
+            }
+            if (!testProteinDna.subSequence(0, 3).equals("ATG")) // Start codon still in place
+            {
                 incorrect++;
-            else if (!peptide.equals(trans.run(result)))
-                // Truism: reverses back to original
+            } else if (!peptide.equals(trans.run(result))) // Truism: reverses back to original
+            {
                 incorrect++;
-            else if (!seq.run(result))
-                // Truism: check for forbidden sequences
+            } else if (!seq.run(result)) // Truism: check for forbidden sequences
+            {
                 incorrect++;
+            }
         }
         assertEquals(incorrect, 0);
     }
 
     class RevComp2 {
+
         Map<Character, String> baseToRC;
 
         public void initiate() {
@@ -393,8 +388,8 @@ public class Team3Test {
         }
 
         /**
-         * Calculates the reverse complement of a DNA sequence preserving the case
-         * of each character
+         * Calculates the reverse complement of a DNA sequence preserving the
+         * case of each character
          *
          * @param dna the DNA sequence that should be reverse complemented
          * @return the reverse complement of dna

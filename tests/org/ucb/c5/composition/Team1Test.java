@@ -1,6 +1,5 @@
 package org.ucb.c5.composition;
 
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -18,7 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * @author Siddharth Gampa
  * @author Lucas Waldburger
@@ -29,7 +27,9 @@ import java.util.Map;
 public class Team1Test {
 
     private static CompositionToDNA c2d;
-    public Team1Test() {}
+
+    public Team1Test() {
+    }
 
     @BeforeClass
     public static void setUpClass() throws Exception {
@@ -38,30 +38,31 @@ public class Team1Test {
     }
 
     private boolean forbiddenSequenceChecker(String dnaSeq) {
-        return (dnaSeq.contains("AAAAAAAA")||
-                dnaSeq.contains("TTTTTTTT")||
-                dnaSeq.contains("CCCCCCCC")||
-                dnaSeq.contains("GGGGGGGG")||
-                dnaSeq.contains("ATATATAT")||
-                dnaSeq.contains("CAATTG")||
-                dnaSeq.contains("GAATTC")||
-                dnaSeq.contains("GGATCC")||
-                dnaSeq.contains("AGATCT")||
-                dnaSeq.contains("ACTAGT")||
-                dnaSeq.contains("TCTAGA")||
-                dnaSeq.contains("GGTCTC")||
-                dnaSeq.contains("CGTCTC")||
-                dnaSeq.contains("CACCTGC")||
-                dnaSeq.contains("CTGCAG")||
-                dnaSeq.contains("CTCGAG")||
-                dnaSeq.contains("GCGGCCGC")||
-                dnaSeq.contains("AAGCTT"));
+        return (dnaSeq.contains("AAAAAAAA")
+                || dnaSeq.contains("TTTTTTTT")
+                || dnaSeq.contains("CCCCCCCC")
+                || dnaSeq.contains("GGGGGGGG")
+                || dnaSeq.contains("ATATATAT")
+                || dnaSeq.contains("CAATTG")
+                || dnaSeq.contains("GAATTC")
+                || dnaSeq.contains("GGATCC")
+                || dnaSeq.contains("AGATCT")
+                || dnaSeq.contains("ACTAGT")
+                || dnaSeq.contains("TCTAGA")
+                || dnaSeq.contains("GGTCTC")
+                || dnaSeq.contains("CGTCTC")
+                || dnaSeq.contains("CACCTGC")
+                || dnaSeq.contains("CTGCAG")
+                || dnaSeq.contains("CTCGAG")
+                || dnaSeq.contains("GCGGCCGC")
+                || dnaSeq.contains("AAGCTT"));
     }
+
     @Test
     public void testTruismTZ() throws Exception {
-        String promoter   = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
+        String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
-        String protein    = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
+        String protein = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
         ArrayList<String> proteins = new ArrayList<>();
         proteins.add(protein);
         Composition comp = new Composition(Host.Ecoli, promoter, proteins, terminator);
@@ -75,36 +76,35 @@ public class Team1Test {
     //Test the GC content of a DNA sequence (globally)
     @Test
     public void testGlobalGCcontentTZ() throws Exception {
-        String promoter   = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
+        String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
-        String protein    = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
+        String protein = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
         ArrayList<String> proteins = new ArrayList<>();
         proteins.add(protein);
         Composition comp = new Composition(Host.Ecoli, promoter, proteins, terminator);
         Construct dna = c2d.run(comp);
 
         List<Transcript> protein2dna = dna.getmRNAs();
-        String[] proteinsDnas  = protein2dna.get(0).getCodons();
+        String[] proteinsDnas = protein2dna.get(0).getCodons();
         Double GCcontent = 0.0;
         for (String codon : proteinsDnas) {
-           for (int i = 0; i < 3; i++) {
-               if (codon.charAt(i) == 'G' || codon.charAt(i) == 'C') {
-                   GCcontent += 1;
-               }
-           }
+            for (int i = 0; i < 3; i++) {
+                if (codon.charAt(i) == 'G' || codon.charAt(i) == 'C') {
+                    GCcontent += 1;
+                }
+            }
         }
         Double GCfreq = GCcontent / (protein.length() * 3);
         assertTrue(GCfreq > 0.4);
         assertTrue(GCfreq < 0.6);
     }
 
-
     @Test
     public void testForbiddenSeqTZ() throws Exception {
-        String promoter   = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
+        String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
-        String protein1   = "MQLEFGSRSTSSRGLRLLQLEKL";
-        String protein2 =  "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
+        String protein1 = "MQLEFGSRSTSSRGLRLLQLEKL";
+        String protein2 = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
         String protein3 = "MIIRDENYFTDKYELTRTHSEVLEAVKVVKPGKTLDLGCGNGRNSLYLAANGYDVDAWDKNAMSIANVERIKSIENLDNLHTRVVDLNNLTFDRQYDFILSTVVLMFLEAKTIPGLIANMQRCTKPGGYNLIVAAMDTADYPCTVGFPFAFKEGELRRYYEGWERVKYNEDVGELHRTDANGNRIKLRFATMLARKK";
         String protein4 = "MQVDLLGSAQSAHALHLFHQHSPLVHCMTNDVVQTFTANTLLALGASPAMVIETEEASQFAAIASALLINVGTLTQPRAQAMRAAVEQAKSSQTPWTLDPVAVGALDYRRHFCHELLSFKPAAIRGNASEIMALAGIANGGRGVDTTDAAANAIPAAQTLARETGAIVVVTGEMDYVTDGHRIIGIHGGDPLMTKVVGTGCALSAVVAACCALPGDTLENVASACHWMKQAGERAVARSEGPGSFVPHFLDALWQLTQEVQA";
         ArrayList<String> proteins = new ArrayList<>();
@@ -117,7 +117,7 @@ public class Team1Test {
 
         List<Transcript> protein2dna = dna.getmRNAs();
         for (int i = 0; i < protein2dna.size(); i++) {
-            String[] proteinsDnas  = protein2dna.get(i).getCodons();
+            String[] proteinsDnas = protein2dna.get(i).getCodons();
             String testProteinDna = "";
             for (String codon : proteinsDnas) {
                 testProteinDna += codon;
@@ -173,7 +173,7 @@ public class Team1Test {
 
         List<Transcript> protein2dna = dna.getmRNAs();
         for (int i = 0; i < protein2dna.size(); i++) {
-            String[] proteinsDnas  = protein2dna.get(i).getCodons();
+            String[] proteinsDnas = protein2dna.get(i).getCodons();
             for (int j = 0; j < proteinsDnas.length; j++) {
                 String codon = proteinsDnas[i];
                 assertEquals(protein2dna.get(i).getPeptide().charAt(i), translate.run(codon).charAt(0));
@@ -183,12 +183,13 @@ public class Team1Test {
 
     @Test
     /**
-     * this tests if running the construct more than once returns the same output
+     * this tests if running the construct more than once returns the same
+     * output
      */
     public void testNonRandomnessSG() throws Exception {
-        String promoter   = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
+        String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
-        String protein    = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
+        String protein = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
         ArrayList<String> proteins = new ArrayList<>();
         proteins.add(protein);
         Composition comp = new Composition(Host.Ecoli, promoter, proteins, terminator);
@@ -200,15 +201,15 @@ public class Team1Test {
             dnas.add(protein2dna.get(0).getCodons());
         }
 
-        assertTrue(Arrays.equals(dnas.get(0),dnas.get(1)));
-
+        assertTrue(Arrays.equals(dnas.get(0), dnas.get(1)));
 
     }
-    
+
     @Test
     /**
-     * This tests if gc content is between the recommended 40 to 60%.
-     * Also tests if the returned string is a valid dna(i.e. only ATCG)
+     * This tests if gc content is between the recommended 40 to 60%. Also tests
+     * if the returned string is a valid dna(i.e. only ATCG)
+     *
      * @author Jerry Li (jtli)
      */
     public void testGCContentJL() throws Exception {
@@ -220,44 +221,40 @@ public class Team1Test {
         proteins.add(protein1);
         proteins.add(protein2);
         Composition comp = new Composition(Host.Ecoli, promoter, proteins, terminator);
-        
+
         //Instantiate and run this algorithm
         Construct dna = c2d.run(comp);
         String seq = dna.toSeq();
-        
+
         double ACount = 0;
         double CCount = 0;
         double GCount = 0;
         double TCount = 0;
-        for(int i=0; i<seq.length(); i++){
+        for (int i = 0; i < seq.length(); i++) {
             char BP = seq.charAt(i);
-            if(BP=='A' || BP=='a'){
+            if (BP == 'A' || BP == 'a') {
                 ACount++;
-            }
-            else if(BP=='C' || BP=='c'){
+            } else if (BP == 'C' || BP == 'c') {
                 CCount++;
-            }
-            else if(BP=='G' || BP=='g'){
+            } else if (BP == 'G' || BP == 'g') {
                 GCount++;
-            }
-            else if(BP=='T' || BP=='t'){
+            } else if (BP == 'T' || BP == 't') {
                 TCount++;
-            }
-            else{
+            } else {
                 throw new IllegalArgumentException("passed in a non-base pair");
             }
         }
-        double gcPercentage = (CCount+GCount)/seq.length();
+        double gcPercentage = (CCount + GCount) / seq.length();
         assertTrue(gcPercentage >= 0.4);
         assertTrue(gcPercentage <= 0.6);
-        
-        
+
     }
-    
-    
+
     @Test
     /**
-     * This tests if the output string increases by three characters if an extra amino acid is added to the protein chain, as it should
+     * This tests if the output string increases by three characters if an extra
+     * amino acid is added to the protein chain, as it should
+     *
      * @author Jerry Li (jtli)
      */
     public void testIncBy3JL() throws Exception {
@@ -270,31 +267,33 @@ public class Team1Test {
         proteins.add(protein1);
         proteins.add(protein2);
         Composition comp = new Composition(Host.Ecoli, promoter, proteins, terminator);
-        
+
         //Instantiate and run this algorithm
         Construct dna = c2d.run(comp);
         String seq = dna.toSeq();
-        
+
         ArrayList<String> proteins2 = new ArrayList<>();
         proteins2.add(protein1);
         proteins2.add(protein3);
         Composition comp2 = new Composition(Host.Ecoli, promoter, proteins2, terminator);
-        
+
         //Instantiate and run this algorithm
         Construct dna2 = c2d.run(comp2);
         //Compile the Construct to a sequence
         String seq2 = dna2.toSeq();
-        
-        assertTrue(seq2.length()-seq.length() == 3);
-        
-        
+
+        assertTrue(seq2.length() - seq.length() == 3);
+
     }
-    
+
     @Test
     /**
-     * This tests if the entire DNA sequence chain produces a forbidden sequence.
-     * Many of the proteins try to create a forbidden sequence with the rbs options given.
-     * @author Jerry Li (jtli), edited to account for differing implementations of sequence checker: Samson Mataraso
+     * This tests if the entire DNA sequence chain produces a forbidden
+     * sequence. Many of the proteins try to create a forbidden sequence with
+     * the rbs options given.
+     *
+     * @author Jerry Li (jtli), edited to account for differing implementations
+     * of sequence checker: Samson Mataraso
      */
     public void testForbiddenSeqJL() throws Exception {
         SequenceChecker2 checker = new SequenceChecker2();
@@ -322,11 +321,11 @@ public class Team1Test {
         proteins.add(protein7);
         proteins.add(protein8);
         Composition comp = new Composition(Host.Ecoli, promoter, proteins, terminator);
-        
+
         //Instantiate and run this algorithm
         Construct dna = c2d.run(comp);
         String seq = dna.toSeq();
-        
+
         ArrayList<String> proteins2 = new ArrayList<>();
         //protein7 added many times to increase likelihood of choosing an rbs with a forbidden sequence with it
         proteins2.add(protein7);
@@ -346,13 +345,13 @@ public class Team1Test {
         assertFalse(forbiddenSequenceChecker(seq2));
 
     }
-    
+
     @Test
     /**
-     * This tests if the program works with both upper and lower case protein sequences.
-     * It will have two identical inputs, besides case, and see if the resulting outputs are equal.
-     * Also a good test for consistency.
-     * Also happens to test if unavoidable bad gc content will not throw an error
+     * This tests if the program works with both upper and lower case protein
+     * sequences. It will have two identical inputs, besides case, and see if
+     * the resulting outputs are equal. Also a good test for consistency. Also
+     * happens to test if unavoidable bad gc content will not throw an error
      *
      * @author Jerry Li (jtli)
      */
@@ -373,11 +372,11 @@ public class Team1Test {
         Construct dna = c2d.run(comp);
         String seq = dna.toSeq();
 
-        protein1=protein1.toLowerCase();
-        protein2=protein2.toLowerCase();
-        protein3=protein3.toUpperCase();
-        promoter=promoter.toUpperCase();
-        terminator=terminator.toLowerCase();
+        protein1 = protein1.toLowerCase();
+        protein2 = protein2.toLowerCase();
+        protein3 = protein3.toUpperCase();
+        promoter = promoter.toUpperCase();
+        terminator = terminator.toLowerCase();
 
         ArrayList<String> proteins2 = new ArrayList<>();
         proteins2.add(protein1);
@@ -389,10 +388,9 @@ public class Team1Test {
         String seq2 = dna2.toSeq();
 
         //makes both sequences uppercase, since it isn't wrong if the cases are different if passed in different cases
-        seq=seq.toUpperCase();
-        seq2=seq2.toUpperCase();
+        seq = seq.toUpperCase();
+        seq2 = seq2.toUpperCase();
         assertTrue(seq2.equals(seq));
-
 
     }
 
@@ -446,8 +444,9 @@ public class Team1Test {
             return true;
         }
     }
-    
+
     private class RevComp2 {
+
         Map<Character, String> baseToRC;
 
         public void initiate() {
@@ -484,8 +483,8 @@ public class Team1Test {
         }
 
         /**
-         * Calculates the reverse complement of a DNA sequence preserving the case
-         * of each character
+         * Calculates the reverse complement of a DNA sequence preserving the
+         * case of each character
          *
          * @param dna the DNA sequence that should be reverse complemented
          * @return the reverse complement of dna
@@ -502,7 +501,7 @@ public class Team1Test {
     }
 
     @Test
-        public void testTruismLW() throws Exception {
+    public void testTruismLW() throws Exception {
         String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
         String protein = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
@@ -518,9 +517,9 @@ public class Team1Test {
 
     @Test
     public void testCodonsLW() throws Exception {
-        String promoter   = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
+        String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
-        String protein    = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
+        String protein = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
         ArrayList<String> proteins = new ArrayList<>();
         proteins.add(protein);
         Composition comp = new Composition(Host.Ecoli, promoter, proteins, terminator);
@@ -535,8 +534,9 @@ public class Team1Test {
                 count++;
             }
         }
-        assertEquals(0,count);
+        assertEquals(0, count);
     }
+
     @Test
     public void testHiddenStopCodonsTW() throws Exception {
         String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
@@ -549,13 +549,12 @@ public class Team1Test {
         Construct dna = c2d.run(comp);
         List<Transcript> protein2dna = dna.getmRNAs();
         String[] codons = protein2dna.get(0).getCodons();
-        for (int i = 0; i < codons.length -1; i++) {
+        for (int i = 0; i < codons.length - 1; i++) {
             if (i == 0) {
                 continue;
             } else {
                 if (codons[i].equals("TAG") || codons[i].equals("TAA") || codons[i].equals("TGA")) {
                     throw new Exception("Hidden Stop Codon Found");
-
                 }
             }
         }

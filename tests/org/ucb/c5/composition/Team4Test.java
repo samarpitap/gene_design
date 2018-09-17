@@ -1,11 +1,9 @@
 package org.ucb.c5.composition;
 
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
-
 
 import org.ucb.c5.composition.model.Composition;
 import org.ucb.c5.composition.model.Host;
@@ -16,27 +14,29 @@ import org.ucb.c5.sequtils.Translate;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/**     
+/**
  * @author Meital
  * @author Joana
  * @author Laura
  * @author Bozhie
  */
 public class Team4Test {
+
     private static CompositionToDNA c2d;
 
-    public Team4Test() {}
+    public Team4Test() {
+    }
 
     @BeforeClass
-    public static void setUpClass() throws Exception{
+    public static void setUpClass() throws Exception {
         c2d = new CompositionToDNA();
         c2d.initiate();
     }
 
-    /** 
-     * Truism test to make sure the returned Composition is DNA and successfully translates the
-     * input protein to some DNA sequence (not necessarily the correct one)
+    /**
+     * Truism test to make sure the returned Composition is DNA and successfully
+     * translates the input protein to some DNA sequence (not necessarily the
+     * correct one)
      *
      * @author Bozhie
      * @throws Exception
@@ -59,6 +59,7 @@ public class Team4Test {
 
     /**
      * Checks if avoids forbidden sequences during long polymeric peptide runs
+     *
      * @author Bozhie
      * @throws Exception
      */
@@ -77,7 +78,7 @@ public class Team4Test {
         for (Transcript t : mRNA) {
             String[] codons = t.getCodons();
             StringBuilder cds = new StringBuilder();
-            for(String codon : codons) {
+            for (String codon : codons) {
                 cds.append(codon);
             }
             assertTrue(c.run(cds.toString()));
@@ -86,6 +87,7 @@ public class Team4Test {
 
     /**
      * Tests if GC content is between 40%-60%
+     *
      * @author Bozhie
      * @throws Exception
      */
@@ -104,7 +106,7 @@ public class Team4Test {
         for (Transcript t : mRNA) {
             String[] codons = t.getCodons();
             StringBuilder cds = new StringBuilder();
-            for(String codon : codons) {
+            for (String codon : codons) {
                 cds.append(codon);
             }
             Double gc = 0.0;
@@ -114,20 +116,24 @@ public class Team4Test {
                     gc++;
                 }
             }
-            Double gcPerc = gc/cds.toString().length();
+            Double gcPerc = gc / cds.toString().length();
             boolean withinRange = (gcPerc <= 0.6) && (gcPerc >= 0.4);
             assertTrue(withinRange);
         }
     }
 
     @Test
-    public void testRun4() throws Exception {assertTrue(true);}
+    public void testRun4() throws Exception {
+        assertTrue(true);
+    }
 
-    /**Tests if output translates to correct amino acids
+    /**
+     * Tests if output translates to correct amino acids
+     *
      * @author Laura Taylor
      */
     @Test
-    public void testAASequence() throws Exception{
+    public void testAASequence() throws Exception {
         //using promoter, terminator, and first protein from CompositionToDNA main class
         String Promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaaccggcacggaactcgctcgggctggccccggtgcattttttaaatacccgcgagaaatagagttgatcgtcaaaaccaacattgcgaccgacggtggcgataggcatccgggtggtgctcaaaagcagcttcgcctggctgatacgttggtcctcgcgccagcttaagacgctaatccctaactgctggcggaaaagatgtgacagacgcgacggcgacaagcaaacatgctgtgcgacgctggcgatatcaaaattgctgtctgccaggtgatcgctgatgtactgacaagcctcgcgtacccgattatccatcggtggatggagcgactcgttaatcgcttccatgcgccgcagtaacaattgctcaagcagatttatcgccagcagctccgaatagcgcccttccccttgcccggcgttaatgatttgcccaaacaggtcgctgaaatgcggctggtgcgcttcatccgggcgaaagaaccccgtattggcaaatattgacggccagttaagccattcatgccagtaggcgcgcggacgaaagtaaacccactggtgataccattcgcgagcctccggatgacgaccgtagtgatgaatctctcctggcgggaacagcaaaatatcacccggtcggcaaacaaattctcgtccctgatttttcaccaccccctgaccgcgaatggtgagattgagaatataacctttcattcccagcggtcggtcgataaaaaaatcgagataaccgttggcctcaatcggcgttaaacccgccaccagatgggcattaaacgagtatcccggcagcaggggatcattttgcgcttcagccatacttttcatactcccgccattcagagaagaaaccaattgtccatattgcatcagacattgccgtcactgcgtcttttactggctcttctcgctaaccaaaccggtaaccccgcttattaaaagcattctgtaacaaagcgggaccaaagccatgacaaaaacgcgtaacaaaagtgtctataatcacggcagaaaagtccacattgattatttgcacggcgtcacactttgctatgccatagcatttttatccataagattagcggatcctacctgacgctttttatcgcaactctctactgtttctccatacccgtttttttgggctagc";
         String Terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCCGAACTCAGAAGTGAAACGCCGTAGCGCCGATGGTAGTGTGGGGTCTCCCCATGCGAGAGTAGGGAACTGCCAGGCATCAAATAAAACGAAAGGCTCAGTCGAAAGACTGGGCCTT";
@@ -139,12 +145,10 @@ public class Team4Test {
         translate.initiate();
         String[] outputCodons = output.getmRNAs().get(0).getCodons();
         String outputCodonString = "";
-        for (String out: outputCodons) {
+        for (String out : outputCodons) {
             outputCodonString += out;
         }
         String peptideString = translate.run(outputCodonString);
         assertEquals(protein.get(0), peptideString);
     }
-
-
 }

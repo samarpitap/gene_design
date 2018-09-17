@@ -21,7 +21,8 @@ public class CompositionToDNATest {
     private static CompositionToDNA c2d;
     private static SequenceChecker checker;
 
-    public CompositionToDNATest() {}
+    public CompositionToDNATest() {
+    }
 
     @BeforeClass
     public static void setUpClass() throws Exception {
@@ -29,7 +30,6 @@ public class CompositionToDNATest {
         c2d.initiate();
         checker = new SequenceChecker();
         checker.initiate();
-
     }
 
     /**
@@ -37,18 +37,18 @@ public class CompositionToDNATest {
      */
     @Test
     public void startCodonTest() throws Exception {
-        String promoter   = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
+        String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
-        String protein    = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
+        String protein = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
         ArrayList<String> proteins = new ArrayList<>();
         proteins.add(protein);
         Composition comp = new Composition(Host.Ecoli, promoter, proteins, terminator);
         Construct dna = c2d.run(comp);
 
         List<Transcript> protein2dna = dna.getmRNAs();
-        String[] proteinsDnas  = protein2dna.get(0).getCodons();
+        String[] proteinsDnas = protein2dna.get(0).getCodons();
         String testProteinDna = proteinsDnas[0];
-        assertEquals( "ATG", testProteinDna.subSequence(0, 3) );
+        assertEquals("ATG", testProteinDna.subSequence(0, 3));
     }
 
     /**
@@ -56,10 +56,10 @@ public class CompositionToDNATest {
      */
     @Test
     public void proteinsNumberTest() throws Exception {
-        String promoter   = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
+        String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
-        String protein1   = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
-        String protein2   = "MALLSSSLSSQIPTGSHPLTHTQCIPHFSTTINAGISAGKPRS";
+        String protein1 = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
+        String protein2 = "MALLSSSLSSQIPTGSHPLTHTQCIPHFSTTINAGISAGKPRS";
         ArrayList<String> proteins = new ArrayList<>();
         proteins.add(protein1);
         proteins.add(protein2);
@@ -67,12 +67,13 @@ public class CompositionToDNATest {
         Construct dna = c2d.run(comp);
 
         List<Transcript> protein2dna = dna.getmRNAs();
-        assertEquals( 2, protein2dna.size() );
+        assertEquals(2, protein2dna.size());
     }
 
     /**
-     * Test a truism that protein reverse translated can be translated back to original sequence
-     * Tests transcript run method
+     * Test a truism that protein reverse translated can be translated back to
+     * original sequence Tests transcript run method
+     *
      * @author Nicholas Hsu
      */
     @Test
@@ -88,22 +89,21 @@ public class CompositionToDNATest {
         Construct dna = c2d.run(comp);
 
         List<Transcript> protein2dna = dna.getmRNAs();
-        String[] proteinsDnas  = protein2dna.get(0).getCodons();
+        String[] proteinsDnas = protein2dna.get(0).getCodons();
         for (int i = 0; i < protein.length(); i++) {
             String codon = proteinsDnas[i];
             assertEquals(protein.charAt(i), translate.run(codon).charAt(0));
         }
-
     }
 
     /**
      * Test an edge case about class CompositionToDNA.
      */
-    @Test (expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void illegalArgumentTest() throws Exception {
-        String promoter   = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
+        String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
-        String protein    = "MYPFIRTARMTVCAKKXXXXXXXXAEQLLADIDRRLDQLLPVE";
+        String protein = "MYPFIRTARMTVCAKKXXXXXXXXAEQLLADIDRRLDQLLPVE";
         ArrayList<String> proteins = new ArrayList<>();
         proteins.add(protein);
         Composition comp = new Composition(Host.Ecoli, promoter, proteins, terminator);
@@ -113,11 +113,11 @@ public class CompositionToDNATest {
     /**
      * Test an edge case about class CompositionToDNA.
      */
-    @Test (expected=IllegalArgumentException.class)
-    public void noArgumentTest()throws Exception {
-        String promoter   = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
+    @Test(expected = IllegalArgumentException.class)
+    public void noArgumentTest() throws Exception {
+        String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
-        String protein    = "";
+        String protein = "";
         ArrayList<String> proteins = new ArrayList<>();
         proteins.add(protein);
         Composition comp = new Composition(Host.Ecoli, promoter, proteins, terminator);
@@ -128,17 +128,17 @@ public class CompositionToDNATest {
      * Perform a correctness test on CompositionToDNA class
      */
     @Test
-    public void illigalDnaSeqTest()throws Exception {
-        String promoter   = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
+    public void illigalDnaSeqTest() throws Exception {
+        String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
-        String protein    = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
+        String protein = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
         ArrayList<String> proteins = new ArrayList<>();
         proteins.add(protein);
         Composition comp = new Composition(Host.Ecoli, promoter, proteins, terminator);
         Construct dna = c2d.run(comp);
 
         List<Transcript> protein2dna = dna.getmRNAs();
-        String[] proteinsDnas  = protein2dna.get(0).getCodons();
+        String[] proteinsDnas = protein2dna.get(0).getCodons();
         String testProteinDna = "";
         for (String codon : proteinsDnas) {
             testProteinDna += codon;
@@ -157,21 +157,21 @@ public class CompositionToDNATest {
 
     /**
      * Ensures the DNA produced actually translates back to the correct protein
-     *  @author Samson Mataraso
+     *
+     * @author Samson Mataraso
      */
     @Test
-    public void Translate()throws Exception {
-        String promoter   = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
+    public void Translate() throws Exception {
+        String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
-        String protein    = "LLPVEMVRYDIMQMTVCAKKHVYPHLTRDAQLLADRRLDFIRTARQ";
+        String protein = "LLPVEMVRYDIMQMTVCAKKHVYPHLTRDAQLLADRRLDFIRTARQ";
         ArrayList<String> proteins = new ArrayList<>();
         proteins.add(protein);
         Composition comp = new Composition(Host.Ecoli, promoter, proteins, terminator);
         Construct dna = c2d.run(comp);
 
-
         List<Transcript> protein2dna = dna.getmRNAs();
-        String[] proteinsDnas  = protein2dna.get(0).getCodons();
+        String[] proteinsDnas = protein2dna.get(0).getCodons();
         StringBuilder buildDNA = new StringBuilder();
         for (String codon : proteinsDnas) {
             buildDNA.append(codon);
@@ -180,27 +180,26 @@ public class CompositionToDNATest {
         Translate translator = new Translate();
         translator.initiate();
         assertEquals(translator.run(DNA), "LLPVEMVRYDIMQMTVCAKKHVYPHLTRDAQLLADRRLDFIRTARQ");
-
-
     }
 
     /**
-     * Ensures there are no forbidden sequences given a peptide that is likely to generate them on a naive approach
-     *  @author Samson Mataraso
+     * Ensures there are no forbidden sequences given a peptide that is likely
+     * to generate them on a naive approach
+     *
+     * @author Samson Mataraso
      */
     @Test
-    public void forbiddenSequenceTest()throws Exception {
-        String promoter   = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
+    public void forbiddenSequenceTest() throws Exception {
+        String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
-        String protein    = "MKKKKKKKKKCAKKHVHLTRDKKKKKDIDRRLDQLLPVE";
+        String protein = "MKKKKKKKKKCAKKHVHLTRDKKKKKDIDRRLDQLLPVE";
         ArrayList<String> proteins = new ArrayList<>();
         proteins.add(protein);
         Composition comp = new Composition(Host.Ecoli, promoter, proteins, terminator);
         Construct dna = c2d.run(comp);
 
-
         List<Transcript> protein2dna = dna.getmRNAs();
-        String[] proteinsDnas  = protein2dna.get(0).getCodons();
+        String[] proteinsDnas = protein2dna.get(0).getCodons();
         String testProteinDna = "";
         for (String codon : proteinsDnas) {
             testProteinDna += codon;
@@ -218,15 +217,14 @@ public class CompositionToDNATest {
     }
 
     //Test the runtime (TZ)
-    @Test (timeout = 30000)
-    public void runTimeTestTZ()throws Exception {
-        String promoter   = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
+    @Test(timeout = 30000)
+    public void runTimeTestTZ() throws Exception {
+        String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
-        String protein    = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
+        String protein = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
         ArrayList<String> proteins = new ArrayList<>();
         proteins.add(protein);
         Composition comp = new Composition(Host.Ecoli, promoter, proteins, terminator);
         Construct dna = c2d.run(comp);
     }
-
 }

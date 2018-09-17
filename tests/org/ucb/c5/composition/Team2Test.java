@@ -1,6 +1,5 @@
 package org.ucb.c5.composition;
 
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -14,7 +13,6 @@ import org.ucb.c5.sequtils.Translate;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * @author Abhinav Koppu
@@ -40,31 +38,33 @@ public class Team2Test {
 
     @Test
     /**
-     * Truism test about the length of the derived DNA sequence
-     * being thrice that of the input protein sequence
+     * Truism test about the length of the derived DNA sequence being thrice
+     * that of the input protein sequence
+     *
      * @author Manraj Gill
      */
     public void testTruism3x() throws Exception {
-        String promoter   = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
+        String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
-        String protein    = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
+        String protein = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
         ArrayList<String> proteins = new ArrayList<>();
         proteins.add(protein);
         Composition comp = new Composition(Host.Ecoli, promoter, proteins, terminator);
         Construct construct = c2d.run(comp);
 
         List<Transcript> mRNAs = construct.getmRNAs();
-        String[] dnaSeqCodons  = mRNAs.get(0).getCodons();
+        String[] dnaSeqCodons = mRNAs.get(0).getCodons();
         String dnaSeq = "";
         for (int i = 0; i < dnaSeqCodons.length; i += 1) {
             dnaSeq = dnaSeq + dnaSeqCodons[i];
         }
 //        System.out.println("A truism test checking that len(dnaSeq) = 3 x len(proteinSeq)");
-        assertEquals( 3, dnaSeq.length() / protein.length() );
+        assertEquals(3, dnaSeq.length() / protein.length());
     }
 
     @Test
-    /** @author David Mai
+    /**
+     * @author David Mai
      *
      * Tests whether outputed sequence returns the original peptide sequence.
      * Promoter, terminator, and protein are taken from CompToDNA
@@ -80,7 +80,7 @@ public class Team2Test {
         translate.initiate(); // Bugfix by PG - translate object not initiated !
         String[] outputCodons = output.getmRNAs().get(0).getCodons();
         String outputCodonString = "";
-        for (String out: outputCodons) {
+        for (String out : outputCodons) {
             outputCodonString += out;
         }
         String peptideString = translate.run(outputCodonString);
@@ -88,7 +88,8 @@ public class Team2Test {
     }
 
     @Test
-    /** @author David Mai
+    /**
+     * @author David Mai
      *
      */
     public void testCustomConversion() throws Exception {
@@ -102,7 +103,7 @@ public class Team2Test {
         translate.initiate(); // Bugfix by PG - translate object not initiated !
         String[] outputCodons = output.getmRNAs().get(0).getCodons();
         String outputCodonString = "";
-        for (String out: outputCodons) {
+        for (String out : outputCodons) {
             outputCodonString += out;
         }
         String peptideString = translate.run(outputCodonString);
@@ -110,7 +111,8 @@ public class Team2Test {
     }
 
     @Test
-    /** @author David Mai
+    /**
+     * @author David Mai
      *
      * Test to see whether there are forbidden sequences in returned sequence.
      */
@@ -125,7 +127,7 @@ public class Team2Test {
         Composition testcomp = new Composition(Host.Ecoli, promoter, proteins, terminator);
         Construct output = c2d.run(testcomp);
         List<Transcript> mRNAs = output.getmRNAs();
-        String[] codons  = mRNAs.get(0).getCodons();
+        String[] codons = mRNAs.get(0).getCodons();
         String cds = "";
         for (int i = 0; i < codons.length; i += 1) {
             cds = cds + codons[i];
@@ -133,73 +135,75 @@ public class Team2Test {
         assertTrue(seq_police.run(cds));
     }
 
-   @Test
+    @Test
     /**
      * Tests whether the returned sequence contains any forbidden sequences.
      *
      * @author Katherine Bigelow, edited: Samson Mataraso
      */
-    public void testForbidden() throws Exception{
-        String promoter   = "c";
+    public void testForbidden() throws Exception {
+        String promoter = "c";
         String terminator = "g";
-        String protein    = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
+        String protein = "MYPFIRTARMTVCAKKHVHLTRDAAEQLLADIDRRLDQLLPVE";
         ArrayList<String> proteins = new ArrayList<>();
         proteins.add(protein);
         Composition comp = new Composition(Host.Ecoli, promoter, proteins, terminator);
         Construct construct = c2d.run(comp);
 
         List<Transcript> mRNAs = construct.getmRNAs();
-        String[] dnaSeqCodons  = mRNAs.get(0).getCodons();
+        String[] dnaSeqCodons = mRNAs.get(0).getCodons();
         String dnaSeq = "";
         for (int i = 0; i < dnaSeqCodons.length; i += 1) {
             dnaSeq = dnaSeq + dnaSeqCodons[i];
         }
 
-        assertFalse(dnaSeq.contains("AAAAAAAA")||
-                dnaSeq.contains("TTTTTTTT")||
-                dnaSeq.contains("CCCCCCCC")||
-                dnaSeq.contains("GGGGGGGG")||
-                dnaSeq.contains("ATATATAT")||
-                dnaSeq.contains("CAATTG")||
-                dnaSeq.contains("GAATTC")||
-                dnaSeq.contains("GGATCC")||
-                dnaSeq.contains("AGATCT")||
-                dnaSeq.contains("ACTAGT")||
-                dnaSeq.contains("TCTAGA")||
-                dnaSeq.contains("GGTCTC")||
-                dnaSeq.contains("CGTCTC")||
-                dnaSeq.contains("CACCTGC")||
-                dnaSeq.contains("CTGCAG")||
-                dnaSeq.contains("CTCGAG")||
-                dnaSeq.contains("GCGGCCGC")||
-                dnaSeq.contains("AAGCTT")
+        assertFalse(dnaSeq.contains("AAAAAAAA")
+                || dnaSeq.contains("TTTTTTTT")
+                || dnaSeq.contains("CCCCCCCC")
+                || dnaSeq.contains("GGGGGGGG")
+                || dnaSeq.contains("ATATATAT")
+                || dnaSeq.contains("CAATTG")
+                || dnaSeq.contains("GAATTC")
+                || dnaSeq.contains("GGATCC")
+                || dnaSeq.contains("AGATCT")
+                || dnaSeq.contains("ACTAGT")
+                || dnaSeq.contains("TCTAGA")
+                || dnaSeq.contains("GGTCTC")
+                || dnaSeq.contains("CGTCTC")
+                || dnaSeq.contains("CACCTGC")
+                || dnaSeq.contains("CTGCAG")
+                || dnaSeq.contains("CTCGAG")
+                || dnaSeq.contains("GCGGCCGC")
+                || dnaSeq.contains("AAGCTT")
         );
     }
 
     @Test
     /**
-     * Reverse-translates a specific protein sequence. Then checks that for every window of 60 amino acids,
-     * the local GC content is less than 80% and greater than 20%.
+     * Reverse-translates a specific protein sequence. Then checks that for
+     * every window of 60 amino acids, the local GC content is less than 80% and
+     * greater than 20%.
+     *
      * @author Rudra Mehta
      */
     public void testLocalGC() throws Exception {
-        String promoter   = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
+        String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
-        String protein    = "MTSIFHFAIIFMLILQIRIQLSEESEFLVDRSKNGLIHVPKDLSQKTTILNISQNYISELWTSDILSLSKLRILIISHNRIQYLDISVFKFNQELEYLDLSHNKLVKISCHPTVNLKHLDLSFNAFDALPICKEFGNMSQLKFLGLSTTHLEKSSVLPIAHLNISKVLLVLGETYGEKEDPEGLQDFNTESLHIVFPTNKEFHFILDVSVKTVANLELSNIKCVLEDNKCSYFLSILAKLQTNPKLSNLTLNNIETTWNSFIRILQLVWHTTVWYFSISNVKLQGQLDFRDFDYSGTSLKALSIHQVVSDVFGFPQSYIYEIFSNMNIKNFTVSGTRMVHMLCPSKISPFLHLDFSNNLLTDTVFENCGHLTELETLILQMNQLKELSKIAEMTTQMKSLQQLDISQNSVSYDEKKGDCSWTKSLLSLNMSSNILTDTIFRCLPPRIKVLDLHSNKIKSIPKQVVKLEALQELNVAFNSLTDLPGCGSFSSLSVLIIDHNSVSHPSADFFQSCQKMRSIKAGDNPFQCTCELGEFVKNIDQVSSEVLEGWPDSYKCDYPESYRGTLLKDFHMSELSCNITLLIVTIVATMLVLAVTVTSLCSYLDLPWYLRMVCQWTQTRRRARNIPLEELQRNLQFHAFISYSGHDSFWVKNELLPNLEKEGMQICLHERNFVPGKSIVENIITCIEKSYKSIFVLSPNFVQSEWCHYELYFAHHNLFHLELKNSFITNPKEEDVLRDWNSGSPSYCNWTGVTCGGREIIGLNLSGLGLTGSISPSIGRFNNLIHIDLSSNRLVGPIPTTLSNLSSSLESLHLFSNLLSGDIPSQLGSLVNLKSLKLGDNELNGTIPETFGNLVNLQMLALASCRLTGLIPSRFGRLVQLQTLILQDNELEGPIPAEIGNCTSLALFAAAFNRLNGSLPAELNRLKNLQTLNLGDNSFSGEIPSQLGDLVSIQYLNLIGNQLQGLIPKRLTELANLQTLDLSSNNLTGVIHEEFWRMNQLEFLVLAKNRLSGSLPKTICSNNTSLKQLFLSETQLSGEIPAEISNCQSLKLLDLSNNTLTGQIPDSLFQLVELTNLYLNNNSLEGTLSSSISNLTNLQEFTLYHNNLEGKVPKEIGFLGKLEIMYLYENRFSGEMPVEIGNCTRLQEIDWYGNRLSGEIPSSIGRLKDLTRLHLRENELVGNIPASLGNCHQMTVIDLADNQLSGSIPSSFGFLTALELFMIYNNSLQGNLPDSLINLKNLTRINFSSNKFNGSISPLCGSSSYLSFDVTENGFEGDIPLELGKSTNLDRLRLGKNQFTGRIPRTFGKISELSLLDISRNSLSGIIPVELGLCKKLTHIDLNNNYLSGVIPTWLGKLPLLGELKLSSNKFVGSLPTEIFSLTNILTLFLDGNSLNGSIPQEIGNLQALNALNLEENQLSGPLPSTIGKLSKLFELRLSRNALTGEIPVEIGQLQDLQSALDLSYNNFTGRIPSTISTLPKLESLDLSHNQLVGEVPGQIGDMKSLGYLNLSYNNLEGKLKKQFSRWQADAFVGNAGLCGSPLSHCNRAGSKNQRSLSPKTVVIISAISSLAAIALMVLVIILFFKQNHDLFKKVRGGNSAFSSNSSSSQAPLFSNGGAKSDIKWDDIMEATHYLNEEFMIGSGGSGKVYKAELKNGETIAVKKILWKDDLMSNKSFNREVKTLGTIRHRHLVKLMGYCSSKADGLNLLIYEYMANGSVWDWLHANENTKKKEVLGWETRLKIALGLAQGVEYLHYDCVPPIVHRDIKSSNVLLDSNIEAHLGDFGLAKILTGNYDTNTESNTMFAGSYGYIAPEYAYSLKATEKSDVYSMGIVLMEIVTGKMPTEAMFDEETDMVRWVETVLDTPPGSEAREKLIDSELKSLLPCEEEAAYQVLEIALQCTKSYPQERPSSRQASEYLLNVFNNRAASYREMQTDTDKMRGVGWQMLSLSLGLVLAILNKVAPQACPAQCSCSGSTVDCHGLALRSVPRNIPRNTERLDLNGNNITRITKTDFAGLRHLRVLQLMENKISTIERGAFQDLKELERLRLNRNHLQLFPELLFLGTAKLYRLDLSENQIQAIPRKAFRGAVDIKNLQLDYNQISCIEDGAFRALRDLEVLTLNNNNITRLSVASFNHMPKLRTFRLHSNNLYCDCHLAWLSDWLRQRPRVGLYTQCMGPSHLRGHNVAEVQKREFVCSGHQSFMAPSCSVLHCPAACTCSNNIVDCRGKGLTEIPTNLPETITEIRLEQNTIKVIPPGAFSPYKKLRRIDLSNNQISELAPDAFQGLRSLNSLVLYGNKITELPKSLFEGLFSLQLLLLNANKINCLRVDAFQDLHNLNLLSLYDNKLQTIAKGTFSPLRAIQTMHLAQNPFICDCHLKWLADYLHTNPIETSGARCTSPRRLANKRIGQIKSKKFRCSAKEQYFIPGTEDYRSKLSGDCFADLACPEKCRCEGTTVDCSNQKLNKIPEHIPQYTAELRLNNNEFTVLEATGIFKKLPQLRKINFSNNKITDIEEGAFEGASGVNEILLTSNRLENVQHKMFKGLESLKTLMLRSNRITCVGNDSFIGLSSVRLLSLYDNQITTVAPGAFDTLHSLSTLNLLANPFNCNCYLAWLGEWLRKKRIVTGNPRCQKPYFLKEIPIQDVAIQDFTCDDGNDDNSCSPLSRCPTECTCLDTVVRCSNKGLKVLPKGIPRDVTELYLDGNQFTLVPKELSNYKHLTLIDLSNNRISTLSNQSFSNMTQLLTLILSYNRLRCIPPRTFDGLKSLRLLSLHGNDISVVPEGAFNDLSALSHLAIGANPLYCDCNMQWLSDWVKSEYKEPGIARCAGPGEMADKLLLTTPSKKFTCQGPVDVNILAKCNPCLSNPCKNDGTCNSDPVDFYRCTCPYGFKGQDCDVPIHACISNPCKHGGTCHLKEGEEDGFWCICADGFEGENCEVNVDDCEDNDCENNSTCVDGINNYTCLCPPEYTGELCEEKLDFCAQDLNPCQHDSKCILTPKGFK";
+        String protein = "MTSIFHFAIIFMLILQIRIQLSEESEFLVDRSKNGLIHVPKDLSQKTTILNISQNYISELWTSDILSLSKLRILIISHNRIQYLDISVFKFNQELEYLDLSHNKLVKISCHPTVNLKHLDLSFNAFDALPICKEFGNMSQLKFLGLSTTHLEKSSVLPIAHLNISKVLLVLGETYGEKEDPEGLQDFNTESLHIVFPTNKEFHFILDVSVKTVANLELSNIKCVLEDNKCSYFLSILAKLQTNPKLSNLTLNNIETTWNSFIRILQLVWHTTVWYFSISNVKLQGQLDFRDFDYSGTSLKALSIHQVVSDVFGFPQSYIYEIFSNMNIKNFTVSGTRMVHMLCPSKISPFLHLDFSNNLLTDTVFENCGHLTELETLILQMNQLKELSKIAEMTTQMKSLQQLDISQNSVSYDEKKGDCSWTKSLLSLNMSSNILTDTIFRCLPPRIKVLDLHSNKIKSIPKQVVKLEALQELNVAFNSLTDLPGCGSFSSLSVLIIDHNSVSHPSADFFQSCQKMRSIKAGDNPFQCTCELGEFVKNIDQVSSEVLEGWPDSYKCDYPESYRGTLLKDFHMSELSCNITLLIVTIVATMLVLAVTVTSLCSYLDLPWYLRMVCQWTQTRRRARNIPLEELQRNLQFHAFISYSGHDSFWVKNELLPNLEKEGMQICLHERNFVPGKSIVENIITCIEKSYKSIFVLSPNFVQSEWCHYELYFAHHNLFHLELKNSFITNPKEEDVLRDWNSGSPSYCNWTGVTCGGREIIGLNLSGLGLTGSISPSIGRFNNLIHIDLSSNRLVGPIPTTLSNLSSSLESLHLFSNLLSGDIPSQLGSLVNLKSLKLGDNELNGTIPETFGNLVNLQMLALASCRLTGLIPSRFGRLVQLQTLILQDNELEGPIPAEIGNCTSLALFAAAFNRLNGSLPAELNRLKNLQTLNLGDNSFSGEIPSQLGDLVSIQYLNLIGNQLQGLIPKRLTELANLQTLDLSSNNLTGVIHEEFWRMNQLEFLVLAKNRLSGSLPKTICSNNTSLKQLFLSETQLSGEIPAEISNCQSLKLLDLSNNTLTGQIPDSLFQLVELTNLYLNNNSLEGTLSSSISNLTNLQEFTLYHNNLEGKVPKEIGFLGKLEIMYLYENRFSGEMPVEIGNCTRLQEIDWYGNRLSGEIPSSIGRLKDLTRLHLRENELVGNIPASLGNCHQMTVIDLADNQLSGSIPSSFGFLTALELFMIYNNSLQGNLPDSLINLKNLTRINFSSNKFNGSISPLCGSSSYLSFDVTENGFEGDIPLELGKSTNLDRLRLGKNQFTGRIPRTFGKISELSLLDISRNSLSGIIPVELGLCKKLTHIDLNNNYLSGVIPTWLGKLPLLGELKLSSNKFVGSLPTEIFSLTNILTLFLDGNSLNGSIPQEIGNLQALNALNLEENQLSGPLPSTIGKLSKLFELRLSRNALTGEIPVEIGQLQDLQSALDLSYNNFTGRIPSTISTLPKLESLDLSHNQLVGEVPGQIGDMKSLGYLNLSYNNLEGKLKKQFSRWQADAFVGNAGLCGSPLSHCNRAGSKNQRSLSPKTVVIISAISSLAAIALMVLVIILFFKQNHDLFKKVRGGNSAFSSNSSSSQAPLFSNGGAKSDIKWDDIMEATHYLNEEFMIGSGGSGKVYKAELKNGETIAVKKILWKDDLMSNKSFNREVKTLGTIRHRHLVKLMGYCSSKADGLNLLIYEYMANGSVWDWLHANENTKKKEVLGWETRLKIALGLAQGVEYLHYDCVPPIVHRDIKSSNVLLDSNIEAHLGDFGLAKILTGNYDTNTESNTMFAGSYGYIAPEYAYSLKATEKSDVYSMGIVLMEIVTGKMPTEAMFDEETDMVRWVETVLDTPPGSEAREKLIDSELKSLLPCEEEAAYQVLEIALQCTKSYPQERPSSRQASEYLLNVFNNRAASYREMQTDTDKMRGVGWQMLSLSLGLVLAILNKVAPQACPAQCSCSGSTVDCHGLALRSVPRNIPRNTERLDLNGNNITRITKTDFAGLRHLRVLQLMENKISTIERGAFQDLKELERLRLNRNHLQLFPELLFLGTAKLYRLDLSENQIQAIPRKAFRGAVDIKNLQLDYNQISCIEDGAFRALRDLEVLTLNNNNITRLSVASFNHMPKLRTFRLHSNNLYCDCHLAWLSDWLRQRPRVGLYTQCMGPSHLRGHNVAEVQKREFVCSGHQSFMAPSCSVLHCPAACTCSNNIVDCRGKGLTEIPTNLPETITEIRLEQNTIKVIPPGAFSPYKKLRRIDLSNNQISELAPDAFQGLRSLNSLVLYGNKITELPKSLFEGLFSLQLLLLNANKINCLRVDAFQDLHNLNLLSLYDNKLQTIAKGTFSPLRAIQTMHLAQNPFICDCHLKWLADYLHTNPIETSGARCTSPRRLANKRIGQIKSKKFRCSAKEQYFIPGTEDYRSKLSGDCFADLACPEKCRCEGTTVDCSNQKLNKIPEHIPQYTAELRLNNNEFTVLEATGIFKKLPQLRKINFSNNKITDIEEGAFEGASGVNEILLTSNRLENVQHKMFKGLESLKTLMLRSNRITCVGNDSFIGLSSVRLLSLYDNQITTVAPGAFDTLHSLSTLNLLANPFNCNCYLAWLGEWLRKKRIVTGNPRCQKPYFLKEIPIQDVAIQDFTCDDGNDDNSCSPLSRCPTECTCLDTVVRCSNKGLKVLPKGIPRDVTELYLDGNQFTLVPKELSNYKHLTLIDLSNNRISTLSNQSFSNMTQLLTLILSYNRLRCIPPRTFDGLKSLRLLSLHGNDISVVPEGAFNDLSALSHLAIGANPLYCDCNMQWLSDWVKSEYKEPGIARCAGPGEMADKLLLTTPSKKFTCQGPVDVNILAKCNPCLSNPCKNDGTCNSDPVDFYRCTCPYGFKGQDCDVPIHACISNPCKHGGTCHLKEGEEDGFWCICADGFEGENCEVNVDDCEDNDCENNSTCVDGINNYTCLCPPEYTGELCEEKLDFCAQDLNPCQHDSKCILTPKGFK";
         ArrayList<String> proteins = new ArrayList<>();
         proteins.add(protein);
         Composition comp = new Composition(Host.Ecoli, promoter, proteins, terminator);
         Construct construct = c2d.run(comp);
 
         List<Transcript> mRNAs = construct.getmRNAs();
-        String[] dnaSeqCodons  = mRNAs.get(0).getCodons();
+        String[] dnaSeqCodons = mRNAs.get(0).getCodons();
         String dnaSeq = "";
         for (int i = 0; i < dnaSeqCodons.length; i += 1) {
             dnaSeq = dnaSeq + dnaSeqCodons[i];
         }
 
         int window_size = 60;
-        for (int window = 0; window < dnaSeq.length(); window+=window_size) {
+        for (int window = 0; window < dnaSeq.length(); window += window_size) {
             String window_bases = dnaSeq.substring(window, window + window_size);
             double window_gc_count = 0;
             for (int i = 0; i < window_bases.length(); i++) {
@@ -207,7 +211,7 @@ public class Team2Test {
                     window_gc_count++;
                 }
             }
-            double window_gc_perc = window_gc_count/window_size;
+            double window_gc_perc = window_gc_count / window_size;
             assertTrue(window_gc_perc < .8);
             assertTrue(window_gc_perc > .2);
         }
@@ -216,6 +220,7 @@ public class Team2Test {
     @Test
     /**
      * Tests whether the output contains only A,C,G and T.
+     *
      * @author Abhinav Koppu
      */
     public void testACTG() throws Exception {
@@ -233,14 +238,11 @@ public class Team2Test {
 
         //Compile the Construct to a sequence
         List<Transcript> mRNAs = dna.getmRNAs();
-        String[] dnaSeqCodons  = mRNAs.get(0).getCodons();
+        String[] dnaSeqCodons = mRNAs.get(0).getCodons();
         String dnaSeq = "";
         for (int i = 0; i < dnaSeqCodons.length; i += 1) {
             dnaSeq = dnaSeq + dnaSeqCodons[i];
         }
         assertFalse(!(dnaSeq.contains("A") || dnaSeq.contains("C") || dnaSeq.contains("G") || dnaSeq.contains("T")));
     }
-
-
-
 }
