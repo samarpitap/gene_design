@@ -265,7 +265,7 @@ public class Team3Test {
             check.append(codon);
         }
         String seq = check.toString();
-        int threshold = 190000;
+        int threshold = 10000;
         double score = counter.run(seq);
         assertTrue(score < threshold);
     }
