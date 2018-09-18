@@ -205,13 +205,13 @@ public class Team1Test {
 
     }
 
-    @Test
     /**
      * This tests if gc content is between the recommended 40 to 60%. Also tests
      * if the returned string is a valid dna(i.e. only ATCG)
      *
      * @author Jerry Li (jtli)
      */
+//    @Test
     public void testGCContentJL() throws Exception {
         String promoter = "ttt";
         String terminator = "TGC";
@@ -250,13 +250,13 @@ public class Team1Test {
 
     }
 
-    @Test
     /**
      * This tests if the output string increases by three characters if an extra
      * amino acid is added to the protein chain, as it should
      *
      * @author Jerry Li (jtli)
      */
+//    @Test
     public void testIncBy3JL() throws Exception {
         String promoter = "ttt";
         String terminator = "TGC";
@@ -286,7 +286,6 @@ public class Team1Test {
 
     }
 
-    @Test
     /**
      * This tests if the entire DNA sequence chain produces a forbidden
      * sequence. Many of the proteins try to create a forbidden sequence with
@@ -295,6 +294,7 @@ public class Team1Test {
      * @author Jerry Li (jtli), edited to account for differing implementations
      * of sequence checker: Samson Mataraso
      */
+//    @Test
     public void testForbiddenSeqJL() throws Exception {
         SequenceChecker2 checker = new SequenceChecker2();
         checker.initiate();
@@ -346,7 +346,6 @@ public class Team1Test {
 
     }
 
-    @Test
     /**
      * This tests if the program works with both upper and lower case protein
      * sequences. It will have two identical inputs, besides case, and see if
@@ -355,6 +354,7 @@ public class Team1Test {
      *
      * @author Jerry Li (jtli)
      */
+//    @Test
     public void testUpperAndLowerCaseJL() throws Exception {
         String promoter = "ttt";
         String terminator = "TGC";

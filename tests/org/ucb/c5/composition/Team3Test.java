@@ -81,7 +81,7 @@ public class Team3Test {
      Truism test to make sure resulting sequence only contains A,T,G, or C
      */
 
-    @Test
+//    @Test
     public void testOnlyATGC() throws Exception {
         String promoter = "ttatgacaacttgacggctacatcattcactttttcttcacaa";
         String terminator = "TGCCTGGCGGCAGTAGCGCGGTGGTCCCACCTGACCCCATGCC";
