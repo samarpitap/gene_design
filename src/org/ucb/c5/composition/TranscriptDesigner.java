@@ -48,23 +48,33 @@ public class TranscriptDesigner {
     }
 
     public Transcript run(String peptide, Set<RBSOption> ignores) throws Exception {
-        //Choose codons for each amino acid
+       //OLD Code:
+       //Choose codons for each amino acid
         String[] codons = new String[peptide.length()];
         for(int i=0; i<peptide.length(); i++) {
             char aa = peptide.charAt(i);
             String codon = aminoAcidToCodon.get(aa);
             codons[i] = codon;
         }
-        
+
         //Choose an RBS
         StringBuilder cds = new StringBuilder();
         for(int i=0; i<codons.length; i++) {
             cds.append(codons[i]);
         }
         RBSOption selectedRBS = rbsChooser.run(cds.toString(), ignores);
-        
+
         //Construct the Transcript and return it
         Transcript out = new Transcript(selectedRBS, peptide, codons);
         return out;
+
+//        String[] codons = new String[peptide.length()];
+//        for(int i=0; i<peptide.length(); i++) {
+//            char aa = peptide.charAt(i);
+//            String codon = aminoAcidToCodon.get(aa);
+//
+//        }
+
+
     }
 }
