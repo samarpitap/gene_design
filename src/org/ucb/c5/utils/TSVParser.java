@@ -20,6 +20,7 @@ public class TSVParser {
     public List<Map<String,String>> run(String filedata) {
         //Split the data into lines
         String[] lines = filedata.split("\\r|\\r?\\n");
+        System.out.println(lines[0]);
         
         //Split the first line which contains the terms
         String[] terms = lines[0].split("\t");
@@ -34,7 +35,8 @@ public class TSVParser {
             }
             out.add(obj);
         }
-        
+
+        System.out.println(out);
         return out;
     }
 }
