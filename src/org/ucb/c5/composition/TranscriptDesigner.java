@@ -4,7 +4,6 @@ import org.ucb.c5.composition.model.RBSOption;
 import org.ucb.c5.composition.model.Transcript;
 import org.ucb.c5.sequtils.HairpinCounter;
 import org.ucb.c5.utils.FileUtils;
-import org.ucb.c5.utils.TSVParser;
 
 import java.util.*;
 
@@ -20,6 +19,7 @@ public class TranscriptDesigner {
     private Map<String, List<String[]>> aminoAcidToCodon;
     private RBSChooser rbsChooser;
     private HairpinCounter hairpinCounter;
+    private SequenceChecker sequenceChecker;
 
     public void initiate() throws Exception {
         //Initialize the RBSChooser
@@ -35,6 +35,10 @@ public class TranscriptDesigner {
         //initialize the hairpin Counter
         hairpinCounter = new HairpinCounter();
         hairpinCounter.initiate();
+
+        //initialize the sequence Checker
+        sequenceChecker = new SequenceChecker();
+        sequenceChecker.initiate();
 
 
     }
@@ -56,25 +60,53 @@ public class TranscriptDesigner {
         }
     }
 
+    //change return to a map sorted by highest valid to lowest valid
+    private void sequenceGenerator (String peptWindow, List<String> choices) throws Exception{
+        String firstAA = peptWindow.substring(0,1);
+        String secondAA = peptWindow.substring(1, 2);
+        String thirdAA = peptWindow.substring(2);
+
+
+        for (String[] codon1: aminoAcidToCodon.get(firstAA)) {
+            for (String[] codon2: aminoAcidToCodon.get(secondAA)) {
+                for (String[] codon3: aminoAcidToCodon.get(thirdAA)) {
+                    String seq = codon1[0]+codon2[0]+codon3[0];
+//                    int totalCAI = Integer.parseInt(codon1[1])+ Integer.parseInt(codon2[1])+ Integer.parseInt(codon3[1]);
+                    if (sequenceChecker.run(seq) == false) {
+                        continue;
+                    }
+
+                    if (hairpinCounter.run(seq) <= 10.0) {
+                        choices.add(seq);
+                    }
+                }
+            }
+        }
+
+
+    }
+
     public Transcript run(String peptide, Set<RBSOption> ignores) throws Exception {
        //OLD Code:
        //Choose codons for each amino acid
         String[] codons = new String[peptide.length()];
-        String testingPeptide = "M"+peptide+"*WW";
+        String testingPeptide = "W"+peptide+"*WW";
 
-        for (int i = 1; i < peptide.length()+1; i++) {
-            String peptWindow = testingPeptide.substring(i-1, i+1);
+        //How to access codon table: Map --> List --> tuple[Codon, CAI]
+//        System.out.println(aminoAcidToCodon.get("W").get(0)[0]);
+//        System.out.println(aminoAcidToCodon.get("W").get(0)[1]);
+
+        for (int i = 1; i <= peptide.length(); i++) {
+            String peptWindow = testingPeptide.substring(i-1, i+2);
             String bestCodonWindow;
 
+            //has all possible choices for window sequence
+            List<String> choices = new ArrayList<>();
+            sequenceGenerator(peptWindow, choices);
 
+            bestCodonWindow = choices.get(0);
 
-
-
-
-
-
-
-
+            codons[i-1] = bestCodonWindow.substring(3,6);
         }
 
 

@@ -36,7 +36,6 @@ public class TSVParser {
             out.add(obj);
         }
 
-        System.out.println(out);
         return out;
     }
 }
