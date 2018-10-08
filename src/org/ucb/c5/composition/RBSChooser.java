@@ -1,85 +1,153 @@
 package org.ucb.c5.composition;
 
+import java.util.*;
+
 import org.ucb.c5.composition.model.RBSOption;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import org.ucb.c5.sequtils.CalcEditDistance;
+import org.ucb.c5.sequtils.HairpinCounter;
+import org.ucb.c5.sequtils.Translate;
+import org.ucb.c5.utils.FileUtils;
 
 /**
- * This is a simple RBS selection algorithm. Provided a CDS,
- * it arbitrarily selects an RBS to include from a list of options. It also
- * allows the user to supply a list of RBSOptions to exclude in making the 
- * selection
+ * Second generation RBSChooser algorithm
  *
+ * Employs a list of genes and their associated ribosome binding sites for
+ * highly-expressed proteins in E. coli.
+ *
+ * @author Samarpita Patra samarpitap
  * @author J. Christopher Anderson
- * 
- * TODO:  REPLACE WITH YOUR VERSION
  */
 public class RBSChooser {
 
-    private List<RBSOption> rbsOptions;
+    private List<RBSOption> rbss;
+    private HashMap<String, String[]> ecoliGenes;
+
 
     public void initiate() throws Exception {
-        //Populate with some RBS choices
-        rbsOptions = new ArrayList<>();
 
-        //From http://parts.igem.org/Part:BBa_I13521
-        RBSOption opt1 = new RBSOption(
-            "BBa_b0034",
-            "RBS based on Elowitz repressilator",
-            "aaagaggagaaatactag",
-            "atggcttcctccgaagacgttatcaaagagttcatgcgtttcaaagttcgtatggaaggttccgttaacggtcacgagttcgaaatcgaaggtgaaggtgaaggtcgtccgtacgaaggtacccagaccgctaaactgaaagttaccaaaggtggtccgctgccgttcgcttgggacatcctgtccccgcagttccagtacggttccaaagcttacgttaaacacccggctgacatcccggactacctgaaactgtccttcccggaaggtttcaaatgggaacgtgttatgaacttcgaagacggtggtgttgttaccgttacccaggactcctccctgcaagacggtgagttcatctacaaagttaaactgcgtggtaccaacttcccgtccgacggtccggttatgcagaaaaaaaccatgggttgggaagcttccaccgaacgtatgtacccggaagacggtgctctgaaaggtgaaatcaaaatgcgtctgaaactgaaagacggtggtcactacgacgctgaagttaaaaccacctacatggctaaaaaaccggttcagctgccgggtgcttacaaaaccgacatcaaactggacatcacctcccacaacgaagactacaccatcgttgaacagtacgaacgtgctgaaggtcgtcactccaccggtgcttaa",
-            "MASSED");
-        rbsOptions.add(opt1);
-        
-        //http://parts.igem.org/wiki/index.php?title=Part:BBa_K156033
-        RBSOption opt2 = new RBSOption(
-            "BBa_b0032",
-            "RBS.3 (medium) -- derivative of BBa_0030",
-            "tcacacaggaaagtactag",
-            "atgactcaacgtatcgcatatgtaactggtggtatgggtggtatcggtactgcaatttgccagcgtctggcgaaagacggtttccgtgttgttgcgggctgcggtccgaactccccgcgtcgtgaaaagtggctggaacaacagaaagccctgggcttcgacttcattgcctccgagggtaatgtagctgactgggattccaccaagactgccttcgataaagttaaatctgaagtgggcgaagtagatgtactgatcaacaacgccggtattactcgtgatgtcgtattccgcaaaatgacccgtgcagactgggatgcagttatcgacaccaacctgacgtctctgttcaacgttaccaaacaggttattgatggtatggctgaccgtggctggggccgcatcgtgaacatctctagcgttaacggccaaaaaggccaatttggtcagacgaattacagcacggctaaagcaggcctgcacggtttcaccatggcactggcgcaggaagtggcgaccaaaggtgttaccgttaataccgtttctccaggttacatcgccaccgatatggttaaggctatccgccaagatgttctggacaagatcgtggctaccattccggttaaacgcctgggcctgccggaagaaattgcgtccatctgtgcgtggctgagctccgaagagtctggtttttccaccggtgcggatttctctctgaacggtggtctgcacatgggttga",
-            "MTQRIA");
-        rbsOptions.add(opt2);
-        
-        RBSOption opt3 = new RBSOption(
-            "Pbad_rbs",
-            "RBS from pBADmychisA with T7RNAP inserted",
-            "CCATACCCGTTTTTTTGGGCTAACAGGAGGAATTAAcc",
-            "atgGacacAattaacatcgctaagaacgacttctctgacatcgaactggctgctatcccgttcaacactctggctgaccattacggtgagcgtttagctcgcgaacagttggcccttgagcatgagtcttacgagatgggtgaagcacgcttccgcaagatgtttgagcgtcaacttaaagctggtgaggttgcggataacgctgccgccaagcctctcatcactaccctactccctaagatgattgcacgcatcaacgactggtttgaggaagtgaaagctaagcgcggcaagcgcccgacagccttccagttcctgcaagaaatcaagccggaagccgtagcgtacatcaccattaagaccactctggcttgcctaaccagtgctgacaatacaaccgttcaggctgtagcaagcgcaatcggtcgggccattgaggacgaggctcgcttcggtcgtatccgtgaccttgaagctaagcacttcaagaaaaacgttgaggaacaactcaacaagcgcgtagggcacgtctacaagaaagcatttatgcaagttgtcgaggctgacatgctctctaagggtctactcggtggcgaggcgtggtcttcgtggcataaggaagactctattcatgtaggagtacgctgcatcgagatgctcattgagtcaaccggaatggttagcttacaccgccaaaatgctggcgtagtaggtcaagactctgagactatcgaactcgcacctgaatacgctgaggctatcgcaacccgtgcaggtgcgctggctggcatctctccgatgttccaaccttgcgtagttcctcctaagccgtggactggcattactggtggtggctattgggctaacggtcgtcgtcctctggcgctggtgcgtactcacagtaagaaagcactgatgcgctacgaagacgtttacatgcctgaggtgtacaaagcgattaacattgcgcaaaacaccgcatggaaaatcaacaagaaagtcctagcggtcgccaacgtaatcaccaagtggaagcattgtccggtcgaggacatccctgcgattgagcgtgaagaactcccgatgaaaccggaagacatcgacatgaatcctgaggctctcaccgcgtggaaacgtgctgccgctgctgtgtaccgcaaggacaaggctcgcaagtctcgccgtatcagccttgagttcatgcttgagcaagccaataagtttgctaaccataaggccatctggttcccttacaacatggactggcgcggtcgtgtttacgctgtgtcaatgttcaacccgcaaggtaacgatatgaccaaaggactgcttacgctggcgaaaggtaaaccaatcggtaaggaaggttactactggctgaaaatccacggtgcaaactgtgcgggtgtcgataaggttccgttccctgagcgcatcaagttcattgaggaaaaccacgagaacatcatggcttgcgctaagtctccactggagaacacttggtgggctgagcaagattctccgttctgcttccttgcgttctgctttgagtacgctggggtacagcaccacggcctgagctataactgctcccttccgctggcgtttgacgggtcttgctctggcatccagcacttctccgcgatgctccgagatgaggtaggtggtcgcgcggttaacttgcttcctagtgaaaccgttcaggacatctacgggattgttgctaagaaagtcaacgagattctacaagcagacgcaatcaatgggaccgataacgaagtagttaccgtgaccgatgagaacactggtgaaatctctgagaaagtcaagctgggcactaaggcactggctggtcaatggctggcttacggtgttactcgcagtgtgactaagcgttcagtcatgacgctggcttacgggtccaaagagttcggcttccgtcaacaagtgctggaagataccattcagccagctattgattccggcaagggtctgatgttcactcagccgaatcaggctgctggatacatggctaagctgatttgggaatctgtgagcgtgacggtggtagctgcggttgaagcaatgaactggcttaagtctgctgctaagctgctggctgctgaggtcaaagataagaagactggagagattcttcgcaagcgttgcgctgtgcattgggtaactcctgatggtttccctgtgtggcaggaatacaagaagcctattcagacgcgcttgaacctgatgttcctcggtcagttccgcttacagcctaccattaacaccaacaaagatagcgagattgatgcacacaaacaggagtctggtatcgctcctaactttgtacacagccaagacggtagccaccttcgtaagactgtagtgtgggcacacgagaagtacggaatcgaatcttttgcactgattcacgactccttcggtaccattccggctgacgctgcgaacctgttcaaagcagtgcgcgaaactatggttgacacatatgagtcttgtgatgtactggctgatttctacgaccagttcgctgaccagttgcacgagtctcaattggacaaaatgccagcacttccggctaaaggtaacttgaacctccgtgacatcttagagtcggacttcgcgttcgcAtaa",
-            "MDTINI");
-        rbsOptions.add(opt3);
-    }
+        //initialize HashMap that stores rbs name and its original cds
+        ecoliGenes = new HashMap<>();
 
-    public RBSOption run(String cds, Set<RBSOption> ignores) throws Exception {
-        for(RBSOption rbsopt : rbsOptions) {
-            if(!ignores.contains(rbsopt)) {
-                return rbsopt;
-            }
+        //initialize rbss
+        rbss = new ArrayList<>();
+
+        //Read the data file
+        String data = FileUtils.readResourceFile("composition/data/coli_genes.txt");
+
+        //Creating the HashMap for coli_genes.txt
+        String[] lines_data = data.split("\\r|\\r?\\n");
+
+        //Create and initiate translate
+        Translate translate = new Translate();
+        translate.initiate();
+
+        for (int i = 0; i < lines_data.length; i++) {
+
+            String line = lines_data[i];
+            String[] tabs = line.split("\t");
+
+            //value will have name of ecoli at i = 0
+            //cds at i = 6
+            ecoliGenes.put(tabs[1], tabs);
+
         }
 
-        throw new Exception();
+        //Read rbs file
+        String rbsOptions = FileUtils.readResourceFile("composition/data/rbs_options.txt");
+
+        //Create RBS list
+
+
+        String[] lines_rbs = rbsOptions.split("\\r|\\r?\\n");
+        for (int i = 0; i <lines_rbs.length; i++) {
+            String line = lines_rbs[i];
+            String[] tabs = line.split("\t");
+
+            String rName = tabs[0];
+            String description = "from ecoli: " + ecoliGenes.get(rName)[0];
+            String rbs = tabs[1];
+            String cds = ecoliGenes.get(rName)[6];
+            String first6aas =  translate.run(cds.substring(0,18));
+
+            rbss.add(new RBSOption(rName, description, rbs, cds, first6aas));
+
+
+        }
+
+
     }
-    
+
+
+
+    /**
+     * Provided a protein of sequence 'peptide', this computes the best ribosome
+     * binding site to use from a list of options.
+     *
+     * It also permits a list of options to exclude.
+     *
+     * @param cds The DNA sequence, ie ATCG
+     * @param ignores The list of RBS's to exclude
+     * @return
+     * @throws Exception
+     */
+    public RBSOption run(String cds, Set<RBSOption> ignores) throws Exception {
+
+        //initialize distance calculator
+        CalcEditDistance calcdist = new CalcEditDistance();
+
+        RBSOption bestRBS = null;
+        int bestDist = 1000;
+        double bestHairpin = 100.00;
+        HairpinCounter hairpinC = new HairpinCounter();
+        hairpinC.initiate();
+
+        for (RBSOption option: rbss) {
+
+            if (ignores.contains(option)){
+                continue;
+            }
+
+            int dist = calcdist.run(cds, option.getCds());
+            String seq = option.getRbs()+cds.substring(0,6);
+            double hairpinCount = hairpinC.run(seq);
+
+            if (dist < bestDist && hairpinCount < bestHairpin) {
+                bestDist = dist;
+                bestHairpin = hairpinCount;
+                bestRBS = option;
+            }
+
+        }
+
+
+        return bestRBS;
+    }
+
+
     public static void main(String[] args) throws Exception {
         //Create an example
-        String cds = "atgaaaggttatattctcaatctcaccattcgcggtcagggggtggtgaaaaatcagggacgagaatttgtttgccgaccgggtgatattttgctgttcccgccaggagagattcatcactacggtcgtcatccggaggctcgcgaatggtatcaccagtgggtttactttcgtccgcgcgcctactggcatgaatggcttaactggccgtcaatatttgccaatacggggttctttcgcccggatgaagcgcaccagccgcatttcagcgacctgtttgggcaaatcattaacgccgggcaaggggaagggcgctattcggagctgctggcgataaatctgcttgagcaattgttactgcggcgcatggaagcgattaacgagtcgctccatccaccgatggataatcgggtacgcgaggcttgtcagtacatcagcgatcacctggcagacagcaattttgatatcgccagcgtcgcacagcatgtttgcttgtcgccgtcgcgtctgtcacatcttttccgccagcagttagggattagcgtcttaagctggcgcgaggaccaacgtatcagccaggcgaagctgcttttgagcaccacccggatgcctatcgccaccgtcggtcgcaatgttggttttgacgatcaactctatttctcgcgggtatttaaaaaatgcaccggggccagcccgagcgagttccgtgccggttgtgaagaaaaagtgaatgatgtagccgtcaagttgtcataa";
-        
+////        String peptide = "MLSDTIDTKQQQQQLHVLFIDSYDSFTYNVVRLIEQQTDISPGVNAVHVTTVHSDTFQSMDQLLPLLPLFDAIVVGPGPGNPNNGAQDMGIISELFENANGKLDEVPILGICLGFQAMCLAQGADVSELNTIKHGQVYEMHLNDAARACGLFSGYPDTFKSTRYHSLHVNAEGIDTLLPLCTTEDENGILLMSAQTKNKPWFGVQYHPESCCSELGGLLVSNFLKLSFINNVKTGRWEKKKLNGEFSDILSRLDRTIDRDPIYKVKEKYPKGEDTTYVKQFEVSEDPKLTFEICNIIREEKFVMSSSVISENTGEWSIIALPNSASQVFTHYGAMKKTTVHYWQDSEISYTLLKKCLDGQDSDLPGSLEVIHEDKSQFWITLGKFMENKIIDNHREIPFIGGLVGILGYEIGQYIACGRCNDDENSLVPDAKLVFINNSIVINHKQGKLYCISLDNTFPVALEQSLRDSFVRKKNIKQSLSWPKYLPEEIDFIITMPDKLDYAKAFKKCQDYMHKGDSYEMCLTTQTKVVPSAVIEPWRIFQTLVQRNPAPFSSFFEFKDIIPRQDETPPVLCFLSTSPERFLKWDADTCELRPIKGTVKKGPQMNLAKATRILKTPKEFGENLMILDLIRNDLYELVPDVRVEEFMSVQEYATVYQLVSVVKAHGLTSASKKTRYSGIDVLKHSLPPGSMTGAPKKITVQLLQDKIESKLNKHVNGGARGVYSGVTGYWSVNSNGDWSVNIRCMYSYNGGTSWQLGAGGAITVLSTLDGELEEMYNKLESNLQIFM";
+        String peptide = "MSQTVHFQGNPVTVANSIPQ";
+        String cds = "atgagccagaccgtgcattttcagggcaacccggtgaccgtggcgaacagcattccgcag".toUpperCase();
+
         //Initiate the chooser
         RBSChooser chooser = new RBSChooser();
         chooser.initiate();
-        
+
         //Make the first choice with an empty Set of ignores
         Set<RBSOption> ignores = new HashSet<>();
         RBSOption selected1 = chooser.run(cds, ignores);
-        
+
         //Add the first selection to the list of things to ignore
         ignores.add(selected1);
-        
+
         //Choose again with an ignore added
         RBSOption selected2 = chooser.run(cds, ignores);
-        
+
         //Print out the two options, which should be different
+        System.out.println("Protein starts with:");
+        System.out.println(cds.substring(0, 6));
+        System.out.println();
         System.out.println("Selected1:\n");
         System.out.println(selected1.toString());
         System.out.println();

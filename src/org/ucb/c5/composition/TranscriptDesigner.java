@@ -4,6 +4,7 @@ import org.ucb.c5.composition.model.RBSOption;
 import org.ucb.c5.composition.model.Transcript;
 import org.ucb.c5.sequtils.HairpinCounter;
 import org.ucb.c5.utils.FileUtils;
+import org.ucb.c5.utils.TSVParser;
 
 import java.util.*;
 
@@ -29,6 +30,8 @@ public class TranscriptDesigner {
         //Construct a map between each amino acid and it's codons
         //ordered by highest-CAI for E coli
         String data = FileUtils.readResourceFile("composition/data/codon_table.txt");
+        String data2 = FileUtils.readResourceFile("composition/data/coli_genes.txt");
+
         aminoAcidToCodon = new HashMap<>();
         parserforCodonTable(data);
 
