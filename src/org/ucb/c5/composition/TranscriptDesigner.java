@@ -4,7 +4,6 @@ import org.ucb.c5.composition.model.RBSOption;
 import org.ucb.c5.composition.model.Transcript;
 import org.ucb.c5.sequtils.HairpinCounter;
 import org.ucb.c5.utils.FileUtils;
-import org.ucb.c5.utils.TSVParser;
 
 import java.util.*;
 
@@ -17,7 +16,7 @@ import java.util.*;
  */
 public class TranscriptDesigner {
 
-    private Map<String, List<String[]>> aminoAcidToCodon;
+    private Map<String, List<Codon>> aminoAcidToCodon;
     private RBSChooser rbsChooser;
     private HairpinCounter hairpinCounter;
     private SequenceChecker sequenceChecker;
@@ -33,7 +32,7 @@ public class TranscriptDesigner {
         String data2 = FileUtils.readResourceFile("composition/data/coli_genes.txt");
 
         aminoAcidToCodon = new HashMap<>();
-        parserforCodonTable(data);
+        parserForCodonTable(data);
 
         //initialize the hairpin Counter
         hairpinCounter = new HairpinCounter();
@@ -46,16 +45,35 @@ public class TranscriptDesigner {
 
     }
 
-    private void parserforCodonTable(String filedata) {
+    class Codon {
+
+        private double CAI;
+        private String codon;
+
+        public Codon (String seq, double cai) {
+            CAI = cai;
+            codon = seq;
+        }
+
+        public double getCAI() {
+            return CAI;
+        }
+
+        public String getCodon() {
+            return codon;
+        }
+    }
+
+    private void parserForCodonTable(String filedata) {
         String[] amino = filedata.split("\\r|\\r?\\n");
 
         for (int a = 0; a < amino.length; a++) {
             String[] parts = amino[a].split("\\s");
 
-            List<String[]> codons = new ArrayList<>();
+            List<Codon> codons = new ArrayList<>();
             for (int i = 1; i < parts.length; i += 2) {
-                String[] codon = {parts[i], parts[i+1]};
-                codons.add(codon);
+                Codon cod = new Codon(parts[i], Double.parseDouble(parts[i+1]));
+                codons.add(cod);
             }
 
             aminoAcidToCodon.put(parts[0], codons);
@@ -70,16 +88,12 @@ public class TranscriptDesigner {
         String thirdAA = peptWindow.substring(2);
 
 
-        for (String[] codon1: aminoAcidToCodon.get(firstAA)) {
-            for (String[] codon2: aminoAcidToCodon.get(secondAA)) {
-                for (String[] codon3: aminoAcidToCodon.get(thirdAA)) {
-                    String seq = codon1[0]+codon2[0]+codon3[0];
-//                    int totalCAI = Integer.parseInt(codon1[1])+ Integer.parseInt(codon2[1])+ Integer.parseInt(codon3[1]);
-                    if (sequenceChecker.run(seq) == false) {
-                        continue;
-                    }
+        for (Codon codon1: aminoAcidToCodon.get(firstAA)) {
+            for (Codon codon2: aminoAcidToCodon.get(secondAA)) {
+                for (Codon codon3: aminoAcidToCodon.get(thirdAA)) {
+                    String seq = codon1.getCodon()+codon2.getCodon()+codon3.getCodon();
 
-                    if (hairpinCounter.run(seq) <= 10.0) {
+                    if (validSequence(seq)) {
                         choices.add(seq);
                     }
                 }
@@ -88,6 +102,34 @@ public class TranscriptDesigner {
 
 
     }
+
+    private boolean validSequence (String seq) throws Exception{
+        boolean valid = false;
+        seq = seq.toUpperCase();
+
+        if (sequenceChecker.run(seq)) {
+            if (hairpinCounter.run(seq) == 0.00) {
+                valid = true;
+            }
+        }
+
+        return valid;
+    }
+
+    private double gcContentFreq(String seq) {
+        int gCtracker = 0;
+
+        seq = seq.toUpperCase();
+
+        for (int i = 0; i < seq.length(); i++) {
+            if (seq.charAt(i) == 'G' || seq.charAt(i) == 'C') { gCtracker++; }
+        }
+
+        double gcFreq = gCtracker/seq.length();
+
+        return gcFreq;
+    }
+
 
     public Transcript run(String peptide, Set<RBSOption> ignores) throws Exception {
        //OLD Code:
@@ -101,15 +143,32 @@ public class TranscriptDesigner {
 
         for (int i = 1; i <= peptide.length(); i++) {
             String peptWindow = testingPeptide.substring(i-1, i+2);
-            String bestCodonWindow;
 
             //has all possible choices for window sequence
             List<String> choices = new ArrayList<>();
             sequenceGenerator(peptWindow, choices);
 
-            bestCodonWindow = choices.get(0);
+            String bestCodon = choices.get(0).substring(3,6);
+            double bestGCContent = gcContentFreq(choices.get(0));
+            double thresholdGC = 0.6*peptide.length()/9;
+            
+            for (String sequence : choices) {
 
-            codons[i-1] = bestCodonWindow.substring(3,6);
+                double gc_seq = gcContentFreq(sequence);
+
+                if (bestGCContent > thresholdGC) {
+                    break;
+                }
+                if (gc_seq > bestGCContent ) {
+                    bestCodon = sequence.substring(3,6);
+                    bestGCContent = gc_seq;
+
+                    if (i > 1 && codons[i-1] == sequence.substring(0,3)) { break; }
+                }
+            }
+
+
+            codons[i-1] = bestCodon;
         }
 
 

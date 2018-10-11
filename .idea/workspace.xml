@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="f7d8e6bc-aeb4-4c8c-864a-2e8310e99eb3" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/ucb/c5/composition/RBSChooser.java" afterPath="$PROJECT_DIR$/src/org/ucb/c5/composition/RBSChooser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/ucb/c5/composition/TranscriptDesigner.java" afterPath="$PROJECT_DIR$/src/org/ucb/c5/composition/TranscriptDesigner.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/ucb/c5/composition/data/codon_table.txt" afterPath="$PROJECT_DIR$/src/org/ucb/c5/composition/data/codon_table.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/org/ucb/c5/composition/Team1Test.java" afterPath="$PROJECT_DIR$/tests/org/ucb/c5/composition/Team1Test.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/org/ucb/c5/composition/Team2Test.java" afterPath="$PROJECT_DIR$/tests/org/ucb/c5/composition/Team2Test.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/org/ucb/c5/composition/Team3Test.java" afterPath="$PROJECT_DIR$/tests/org/ucb/c5/composition/Team3Test.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,14 +19,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TranscriptDesigner.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SequenceChecker.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/ucb/c5/composition/SequenceChecker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="161">
+              <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TranscriptDesigner.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/ucb/c5/composition/TranscriptDesigner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="121" column="0" lean-forward="false" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+            <state relative-caret-position="85">
+              <caret line="153" column="12" lean-forward="false" selection-start-line="153" selection-start-column="12" selection-end-line="153" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1632#1633#0" expanded="true" />
+                <element signature="e#1666#1667#0" expanded="true" />
+                <element signature="e#1702#1703#0" expanded="true" />
+                <element signature="e#1738#1739#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SummarizeTests.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/org/ucb/c5/composition/SummarizeTests.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="11" selection-end-column="3" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -31,18 +58,68 @@
       <file leaf-file-name="CompositionToDNA.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/ucb/c5/composition/CompositionToDNA.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+            <state relative-caret-position="169">
+              <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Transcript.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Transcript.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/ucb/c5/composition/model/Transcript.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
+            <state relative-caret-position="455">
               <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Team1Test.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/org/ucb/c5/composition/Team1Test.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1245">
+              <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Team2Test.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/org/ucb/c5/composition/Team2Test.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="154">
+              <caret line="214" column="0" lean-forward="false" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="codon_table.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/ucb/c5/composition/data/codon_table.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Team3Test.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/org/ucb/c5/composition/Team3Test.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="296">
+              <caret line="295" column="0" lean-forward="false" selection-start-line="295" selection-start-column="0" selection-end-line="295" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Team4Test.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/org/ucb/c5/composition/Team4Test.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1620">
+              <caret line="120" column="0" lean-forward="false" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -59,11 +136,15 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>print</find>
       <find>testRandom</find>
       <find>Random</find>
       <find>read</find>
       <find>RBSC</find>
+      <find>sequenceChec</find>
+      <find>print</find>
+      <find>println</find>
+      <find>system.</find>
+      <find>gcCon</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -77,22 +158,25 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/org/ucb/c5/composition/data/codon_table.txt" />
         <option value="$PROJECT_DIR$/src/org/ucb/c5/composition/CompositionToDNA.java" />
         <option value="$PROJECT_DIR$/src/org/ucb/c5/utils/TSVParser.java" />
         <option value="$PROJECT_DIR$/src/org/ucb/c5/composition/model/SequenceWindow.java" />
         <option value="$PROJECT_DIR$/tests/org/ucb/c5/composition/MyTest.java" />
-        <option value="$PROJECT_DIR$/src/org/ucb/c5/composition/TranscriptDesigner.java" />
         <option value="$PROJECT_DIR$/src/org/ucb/c5/composition/RBSChooser.java" />
         <option value="$PROJECT_DIR$/tests/org/ucb/c5/composition/Team4Test.java" />
+        <option value="$PROJECT_DIR$/tests/org/ucb/c5/composition/Team1Test.java" />
+        <option value="$PROJECT_DIR$/tests/org/ucb/c5/composition/Team3Test.java" />
+        <option value="$PROJECT_DIR$/tests/org/ucb/c5/composition/Team2Test.java" />
+        <option value="$PROJECT_DIR$/src/org/ucb/c5/composition/data/codon_table.txt" />
+        <option value="$PROJECT_DIR$/src/org/ucb/c5/composition/TranscriptDesigner.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="107" />
+    <option name="x" value="64" />
     <option name="y" value="23" />
-    <option name="width" value="1333" />
-    <option name="height" value="778" />
+    <option name="width" value="1387" />
+    <option name="height" value="829" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -141,7 +225,21 @@
             <path>
               <item name="project-3-gene-design-samarpitap" type="b2602c69:ProjectViewProjectNode" />
               <item name="project-3-gene-design-samarpitap" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="c5" type="462c0819:PsiDirectoryNode" />
+              <item name="composition" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="project-3-gene-design-samarpitap" type="b2602c69:ProjectViewProjectNode" />
+              <item name="project-3-gene-design-samarpitap" type="462c0819:PsiDirectoryNode" />
               <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="project-3-gene-design-samarpitap" type="b2602c69:ProjectViewProjectNode" />
+              <item name="project-3-gene-design-samarpitap" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="composition" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -166,26 +264,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.SummarizeTests">
-    <configuration name="CompositionToDNA" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="org.ucb.c5.composition.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="org.ucb.c5.composition.CompositionToDNA" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="project-3-gene-design-samarpitap" />
-      <envs />
-    </configuration>
+  <component name="RunManager" selected="JUnit.Team3Test">
     <configuration name="CompositionToDNATest.runTimeTestTZ" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -211,24 +290,80 @@
       <envs />
       <patterns />
     </configuration>
-    <configuration name="SummarizeTests" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Team1Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="org.ucb.c5.composition.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="org.ucb.c5.composition.SummarizeTests" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <module name="project-3-gene-design-samarpitap" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="PACKAGE_NAME" value="org.ucb.c5.composition" />
+      <option name="MAIN_CLASS_NAME" value="org.ucb.c5.composition.Team1Test" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="project-3-gene-design-samarpitap" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
       <envs />
+      <patterns />
+    </configuration>
+    <configuration name="Team2Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="org.ucb.c5.composition.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="project-3-gene-design-samarpitap" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="org.ucb.c5.composition" />
+      <option name="MAIN_CLASS_NAME" value="org.ucb.c5.composition.Team2Test" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="Team2Test.testLocalGC" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="org.ucb.c5.composition.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="project-3-gene-design-samarpitap" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="org.ucb.c5.composition" />
+      <option name="MAIN_CLASS_NAME" value="org.ucb.c5.composition.Team2Test" />
+      <option name="METHOD_NAME" value="testLocalGC" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
     </configuration>
     <configuration name="Team3Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
@@ -269,31 +404,6 @@
       <option name="MAIN_CLASS_NAME" value="org.ucb.c5.composition.Team4Test" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="Team4Test.gcContentinRange" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="org.ucb.c5.composition.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="project-3-gene-design-samarpitap" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="org.ucb.c5.composition" />
-      <option name="MAIN_CLASS_NAME" value="org.ucb.c5.composition.Team4Test" />
-      <option name="METHOD_NAME" value="gcContentinRange" />
-      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -389,18 +499,18 @@
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="JUnit.CompositionToDNATest.runTimeTestTZ" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.Team3Test" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.Team4Test" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.Team4Test.gcContentinRange" />
-      <item index="4" class="java.lang.String" itemvalue="Application.CompositionToDNA" />
-      <item index="5" class="java.lang.String" itemvalue="Application.SummarizeTests" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.Team2Test" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.Team4Test" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.Team2Test.testLocalGC" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.Team1Test" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.SummarizeTests" />
-        <item index="1" class="java.lang.String" itemvalue="Application.CompositionToDNA" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.Team4Test.gcContentinRange" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.Team4Test" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.Team3Test" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.Team3Test" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.Team4Test" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.Team1Test" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.Team2Test" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.Team2Test.testLocalGC" />
       </list>
     </recent_temporary>
   </component>
@@ -423,39 +533,39 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="MyTest_testRuntimeForRandom - 2018.10.06 at 14h 53m 09s.xml">
-      <configuration name="MyTest.testRuntimeForRandom" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Team1Test - 2018.10.08 at 16h 14m 30s.xml">
+    <history-entry file="Team1Test - 2018.10.10 at 19h 26m 18s.xml">
       <configuration name="Team1Test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Team1Test - 2018.10.08 at 16h 18m 04s.xml">
-      <configuration name="Team1Test" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Team2Test - 2018.10.08 at 16h 20m 17s.xml">
+    <history-entry file="Team2Test - 2018.10.10 at 19h 24m 37s.xml">
       <configuration name="Team2Test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Team3Test - 2018.10.02 at 20h 43m 19s.xml">
+    <history-entry file="Team3Test - 2018.10.10 at 19h 25m 04s.xml">
       <configuration name="Team3Test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Team3Test - 2018.10.08 at 16h 21m 25s.xml">
+    <history-entry file="Team3Test - 2018.10.10 at 19h 37m 00s.xml">
       <configuration name="Team3Test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Team4Test - 2018.10.02 at 20h 43m 31s.xml">
+    <history-entry file="Team3Test - 2018.10.10 at 19h 41m 58s.xml">
+      <configuration name="Team3Test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Team3Test - 2018.10.10 at 19h 53m 07s.xml">
+      <configuration name="Team3Test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Team3Test - 2018.10.10 at 20h 01m 14s.xml">
+      <configuration name="Team3Test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Team4Test - 2018.10.10 at 19h 26m 45s.xml">
       <configuration name="Team4Test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Team4Test - 2018.10.08 at 16h 28m 03s.xml">
+    <history-entry file="Team4Test - 2018.10.10 at 19h 35m 56s.xml">
       <configuration name="Team4Test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Team4Test_gcContentinRange - 2018.10.08 at 16h 29m 13s.xml">
-      <configuration name="Team4Test.gcContentinRange" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Team4Test_gcContentinRange - 2018.10.08 at 16h 46m 39s.xml">
-      <configuration name="Team4Test.gcContentinRange" configurationId="JUnit" />
+    <history-entry file="Team4Test - 2018.10.10 at 19h 36m 25s.xml">
+      <configuration name="Team4Test" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="107" y="23" width="1333" height="778" extended-state="0" />
+    <frame x="64" y="23" width="1387" height="829" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -466,18 +576,18 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3440703" sideWeight="0.50271106" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3440703" sideWeight="0.4972889" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42643052" sideWeight="0.4972889" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Style Checker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32970026" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20526724" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18884759" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24981412" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39918256" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39918256" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -525,18 +635,13 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/org/ucb/c5/composition/TranscriptDesigner.java</url>
-          <line>69</line>
+          <url>file://$PROJECT_DIR$/tests/org/ucb/c5/composition/Team3Test.java</url>
+          <line>295</line>
           <properties />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/org/ucb/c5/composition/TranscriptDesigner.java</url>
-          <line>107</line>
-          <properties />
-          <option name="timeStamp" value="1" />
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="2" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -570,7 +675,7 @@
         <state relative-caret-position="390">
           <caret line="26" column="22" lean-forward="false" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -596,7 +701,7 @@
         <state relative-caret-position="705">
           <caret line="62" column="40" lean-forward="true" selection-start-line="62" selection-start-column="40" selection-end-line="62" selection-end-column="40" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -628,6 +733,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="12" lean-forward="true" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -636,7 +742,7 @@
         <state relative-caret-position="210">
           <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -646,7 +752,7 @@
         <state relative-caret-position="795">
           <caret line="53" column="7" lean-forward="false" selection-start-line="53" selection-start-column="7" selection-end-line="53" selection-end-column="7" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -665,6 +771,10 @@
           <caret line="30" column="21" lean-forward="true" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1632#1633#0" expanded="true" />
+            <element signature="e#1666#1667#0" expanded="true" />
+            <element signature="e#1702#1703#0" expanded="true" />
+            <element signature="e#1738#1739#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -683,6 +793,10 @@
           <caret line="55" column="30" lean-forward="false" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1632#1633#0" expanded="true" />
+            <element signature="e#1666#1667#0" expanded="true" />
+            <element signature="e#1702#1703#0" expanded="true" />
+            <element signature="e#1738#1739#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -692,7 +806,7 @@
         <state relative-caret-position="795">
           <caret line="53" column="7" lean-forward="true" selection-start-line="53" selection-start-column="7" selection-end-line="53" selection-end-column="7" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -702,7 +816,7 @@
         <state relative-caret-position="210">
           <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -730,26 +844,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/ucb/c5/composition/data/codon_table.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="37" lean-forward="true" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/ucb/c5/composition/model/SequenceWindow.java" />
     <entry file="file://$PROJECT_DIR$/src/org/ucb/c5/utils/TSVParser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/ucb/c5/composition/SequenceChecker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="29" column="29" lean-forward="false" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
           <folding />
         </state>
       </provider>
@@ -767,7 +866,7 @@
         <state relative-caret-position="930">
           <caret line="62" column="40" lean-forward="false" selection-start-line="62" selection-start-column="40" selection-end-line="62" selection-end-column="40" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -777,7 +876,7 @@
         <state relative-caret-position="15">
           <caret line="53" column="7" lean-forward="false" selection-start-line="53" selection-start-column="7" selection-end-line="53" selection-end-column="7" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -798,73 +897,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/ucb/c5/composition/TranscriptDesigner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="121" column="0" lean-forward="false" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/ucb/c5/composition/RBSChooser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="188">
           <caret line="78" column="0" lean-forward="true" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/org/ucb/c5/composition/Team1Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="97" column="0" lean-forward="false" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/org/ucb/c5/composition/Team2Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="215" column="0" lean-forward="false" selection-start-line="215" selection-start-column="0" selection-end-line="215" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/org/ucb/c5/composition/Team3Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="269" column="0" lean-forward="false" selection-start-line="269" selection-start-column="0" selection-end-line="269" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/org/ucb/c5/composition/Team4Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="120" column="0" lean-forward="false" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/ucb/c5/composition/CompositionToDNA.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/org/ucb/c5/composition/SummarizeTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-69">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="11" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -876,11 +915,97 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/src.zip!/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="652" column="0" lean-forward="false" selection-start-line="652" selection-start-column="0" selection-end-line="652" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/org/ucb/c5/composition/Team2Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="214" column="0" lean-forward="false" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/ucb/c5/composition/data/codon_table.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/org/ucb/c5/composition/Team1Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1245">
+          <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/org/ucb/c5/composition/Team4Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1620">
+          <caret line="120" column="0" lean-forward="false" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/org/ucb/c5/composition/SummarizeTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="11" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/ucb/c5/composition/CompositionToDNA.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/ucb/c5/composition/model/Transcript.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
+        <state relative-caret-position="455">
           <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/org/ucb/c5/composition/Team3Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="295" column="0" lean-forward="false" selection-start-line="295" selection-start-column="0" selection-end-line="295" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/ucb/c5/composition/SequenceChecker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/ucb/c5/composition/TranscriptDesigner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="153" column="12" lean-forward="false" selection-start-line="153" selection-start-column="12" selection-end-line="153" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1632#1633#0" expanded="true" />
+            <element signature="e#1666#1667#0" expanded="true" />
+            <element signature="e#1702#1703#0" expanded="true" />
+            <element signature="e#1738#1739#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

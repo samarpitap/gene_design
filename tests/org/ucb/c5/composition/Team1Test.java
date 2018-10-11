@@ -95,6 +95,7 @@ public class Team1Test {
             }
         }
         Double GCfreq = GCcontent / (protein.length() * 3);
+//        System.out.println(GCfreq);
         assertTrue(GCfreq > 0.4);
         assertTrue(GCfreq < 0.6);
     }

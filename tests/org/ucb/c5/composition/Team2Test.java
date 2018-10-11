@@ -212,6 +212,7 @@ public class Team2Test {
                 }
             }
             double window_gc_perc = window_gc_count / window_size;
+
             assertTrue(window_gc_perc < .8);
             assertTrue(window_gc_perc > .2);
         }
