@@ -82,42 +82,24 @@ public class TranscriptDesigner {
     }
 
     //change return to a map sorted by highest valid to lowest valid
-    private void sequenceGenerator (String peptWindow, List<String> choices) throws Exception{
-        String firstAA = peptWindow.substring(0,1);
+    private void sequenceGenerator (String peptWindow, List<String> choices, String codon1) throws Exception{
         String secondAA = peptWindow.substring(1, 2);
         String thirdAA = peptWindow.substring(2);
 
 
-        for (Codon codon1: aminoAcidToCodon.get(firstAA)) {
-            for (Codon codon2: aminoAcidToCodon.get(secondAA)) {
-                for (Codon codon3: aminoAcidToCodon.get(thirdAA)) {
-                    String seq = codon1.getCodon()+codon2.getCodon()+codon3.getCodon();
-
-                    if (validSequence(seq)) {
-                        choices.add(seq);
-                    }
-                }
+        for (Codon codon2: aminoAcidToCodon.get(secondAA)) {
+            for (Codon codon3: aminoAcidToCodon.get(thirdAA)) {
+                String seq = codon1+codon2.getCodon()+codon3.getCodon();
+                choices.add(seq);
             }
         }
 
 
-    }
 
-    private boolean validSequence (String seq) throws Exception{
-        boolean valid = false;
-        seq = seq.toUpperCase();
-
-        if (sequenceChecker.run(seq)) {
-            if (hairpinCounter.run(seq) == 0.00) {
-                valid = true;
-            }
-        }
-
-        return valid;
     }
 
     private double gcContentFreq(String seq) {
-        int gCtracker = 0;
+        double gCtracker = 0.0;
 
         seq = seq.toUpperCase();
 
@@ -125,7 +107,7 @@ public class TranscriptDesigner {
             if (seq.charAt(i) == 'G' || seq.charAt(i) == 'C') { gCtracker++; }
         }
 
-        double gcFreq = gCtracker/seq.length();
+        double gcFreq = gCtracker/(double)(seq.length());
 
         return gcFreq;
     }
@@ -135,40 +117,60 @@ public class TranscriptDesigner {
        //OLD Code:
        //Choose codons for each amino acid
         String[] codons = new String[peptide.length()];
-        String testingPeptide = "W"+peptide+"*WW";
+        codons[0] = "ATG"; //for M
+        String testingPeptide = peptide+"WW";
 
-        //How to access codon table: Map --> List --> tuple[Codon, CAI]
-//        System.out.println(aminoAcidToCodon.get("W").get(0)[0]);
-//        System.out.println(aminoAcidToCodon.get("W").get(0)[1]);
-
-        for (int i = 1; i <= peptide.length(); i++) {
+        for (int i = 1; i < peptide.length(); i++) {
             String peptWindow = testingPeptide.substring(i-1, i+2);
 
             //has all possible choices for window sequence
             List<String> choices = new ArrayList<>();
-            sequenceGenerator(peptWindow, choices);
+            sequenceGenerator(peptWindow, choices, codons[i-1]);
 
-            String bestCodon = choices.get(0).substring(3,6);
-            double bestGCContent = gcContentFreq(choices.get(0));
-            double thresholdGC = 0.6*peptide.length()/9;
-            
-            for (String sequence : choices) {
 
-                double gc_seq = gcContentFreq(sequence);
-
-                if (bestGCContent > thresholdGC) {
-                    break;
+            String upstream = "";
+            if (i < 2) {
+                upstream = "TGGATG";
+            } else if (i >= 2) {
+                for (int c = 0; c < i; c++) {
+                    upstream += codons[c];
                 }
-                if (gc_seq > bestGCContent ) {
-                    bestCodon = sequence.substring(3,6);
-                    bestGCContent = gc_seq;
 
-                    if (i > 1 && codons[i-1] == sequence.substring(0,3)) { break; }
+                if (upstream.length() > 6) {
+                    upstream = upstream.substring(upstream.length()-6);
                 }
             }
 
+            List<String> forbiddenSeq = new ArrayList<>();
+            for (String seq : choices) {
+                String check = upstream+seq.substring(3);
+                boolean wtf = sequenceChecker.run(check);
+                if (!(sequenceChecker.run(check))){
+                    forbiddenSeq.add(seq);
+                }
 
-            codons[i-1] = bestCodon;
+            }
+
+            if (forbiddenSeq.size() < choices.size()) {
+                for (String rmv : forbiddenSeq) {
+                    choices.remove(rmv);
+                }
+            }
+
+            String bestCodon = choices.get(0).substring(3,6);
+            double lowestHairpin = hairpinCounter.run(upstream+choices.get(0).substring(3));
+            for (String seq: choices) {
+                String codon = seq.substring(3,6);
+                String check = upstream + seq.substring(3);
+                double hpin = hairpinCounter.run(check);
+
+                if (hpin < lowestHairpin) {
+                    bestCodon = codon;
+                    lowestHairpin = hpin;
+                }
+            }
+
+            codons[i] = bestCodon;
         }
 
 
