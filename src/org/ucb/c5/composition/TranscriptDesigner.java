@@ -116,11 +116,24 @@ public class TranscriptDesigner {
     public Transcript run(String peptide, Set<RBSOption> ignores) throws Exception {
        //OLD Code:
        //Choose codons for each amino acid
-        String[] codons = new String[peptide.length()];
-        codons[0] = "ATG"; //for M
-        String testingPeptide = peptide+"WW";
+        if (peptide.length() == 0) {
+            throw new IllegalArgumentException("Peptide cannot be empty string");
+        }
 
-        for (int i = 1; i < peptide.length(); i++) {
+        for (int i = 0; i < peptide.length(); i++) {
+            String aa = Character.toString(peptide.charAt(i));
+            if (!aminoAcidToCodon.containsKey(aa)) {
+                throw new IllegalArgumentException("Peptide has illegal amino acids");
+            }
+        }
+
+        String testingPeptide = "W"+peptide+"WW";
+        String[] codons = new String[testingPeptide.length()];
+        codons[0] = "TGG";
+//        codons[0] = "ATG"; //for M
+
+
+        for (int i = 1; i < testingPeptide.length()-1; i++) {
             String peptWindow = testingPeptide.substring(i-1, i+2);
 
             //has all possible choices for window sequence
@@ -129,23 +142,34 @@ public class TranscriptDesigner {
 
 
             String upstream = "";
-            if (i < 2) {
-                upstream = "TGGATG";
-            } else if (i >= 2) {
-                for (int c = 0; c < i; c++) {
-                    upstream += codons[c];
-                }
-
-                if (upstream.length() > 6) {
-                    upstream = upstream.substring(upstream.length()-6);
-                }
+            for (int c = 0; c < i; c++) {
+                upstream += codons[c];
             }
+
+            if (upstream.length() > 6) {
+                upstream = upstream.substring(upstream.length()-6);
+            }
+//            if (i < 2) {
+//                upstream = "TGGATG";
+//            } else if (i >= 2) {
+//                for (int c = 0; c < i; c++) {
+//                    upstream += codons[c];
+//                }
+//
+//                if (upstream.length() > 6) {
+//                    upstream = upstream.substring(upstream.length()-6);
+//                }
+//            }
 
             List<String> forbiddenSeq = new ArrayList<>();
             for (String seq : choices) {
                 String check = upstream+seq.substring(3);
                 boolean wtf = sequenceChecker.run(check);
                 if (!(sequenceChecker.run(check))){
+                    forbiddenSeq.add(seq);
+                }
+
+                if (hairpinCounter.run(check) != 0) {
                     forbiddenSeq.add(seq);
                 }
 
@@ -158,21 +182,27 @@ public class TranscriptDesigner {
             }
 
             String bestCodon = choices.get(0).substring(3,6);
-            double lowestHairpin = hairpinCounter.run(upstream+choices.get(0).substring(3));
-            for (String seq: choices) {
-                String codon = seq.substring(3,6);
-                String check = upstream + seq.substring(3);
-                double hpin = hairpinCounter.run(check);
-
-                if (hpin < lowestHairpin) {
-                    bestCodon = codon;
-                    lowestHairpin = hpin;
-                }
-            }
+//            double lowestHairpin = hairpinCounter.run(upstream+choices.get(0).substring(3));
+//            for (String seq: choices) {
+//                String codon = seq.substring(3,6);
+//                String check = upstream + seq.substring(3);
+//                double hpin = hairpinCounter.run(check);
+//
+//                if (hpin < lowestHairpin) {
+//                    bestCodon = codon;
+//                    lowestHairpin = hpin;
+//                }
+//            }
 
             codons[i] = bestCodon;
         }
 
+        String[] actualCodons = new String[peptide.length()];
+        for (int i=0; i < actualCodons.length; i++) {
+            actualCodons[i] = codons[i+1];
+        }
+
+        codons = actualCodons;
 
 
         //Choose an RBS
